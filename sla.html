@@ -235,7 +235,7 @@
         <div class="pcard you">
           <span class="who">आपका वादा</span>
           <div class="what">अपनी सर्विस SLA 80% के पार रखें।</div>
-          <div class="sub">हर शिकायत 4 घंटे के अंदर हल = अच्छी सर्विस ✅</div>
+          <div class="sub">हर शिकायत समय से रीजाल्व = अच्छी सर्विस ✅</div>
         </div>
       </div>
       <button class="btn" onclick="goPlan()">गारंटी की डिटेल देखें →</button>
@@ -260,7 +260,7 @@
       <div class="qhint">सवाल 1 / 2</div>
       <h2>₹20,000 पाने के लिए आपको क्या करना है? 🤔</h2>
       <div class="opts" id="q1opts">
-        <button class="opt" data-c="1" data-right="1" onclick="answer(1,this,'network_health')"><span class="emo">💪</span><span class="txt">अपनी सर्विस SLA (शिकायत 4 घंटे में हल) 80% पार रखनी है</span></button>
+        <button class="opt" data-c="1" data-right="1" onclick="answer(1,this,'network_health')"><span class="emo">💪</span><span class="txt">अपनी सर्विस SLA (शिकायत समय से रीजाल्व) 80% पार रखनी है</span></button>
         <button class="opt" data-c="2" onclick="answer(1,this,'lottery')"><span class="emo">🎰</span><span class="txt">लॉटरी का टिकट खरीदना है</span></button>
         <button class="opt" data-c="3" onclick="answer(1,this,'pray')"><span class="emo">🙏</span><span class="txt">रोज़ भगवान से प्रार्थना करनी है</span></button>
         <button class="opt" data-c="4" onclick="answer(1,this,'sleep')"><span class="emo">😴</span><span class="txt">कुछ नहीं, बस आराम से सोना है</span></button>
@@ -273,7 +273,7 @@
       <div class="qhint">सवाल 2 / 2</div>
       <h2>Customer की शिकायत आई है —<br>आप क्या करेंगे? 🛠️</h2>
       <div class="opts" id="q2opts">
-        <button class="opt" data-c="1" data-right="1" onclick="answer(2,this,'fix_now')"><span class="emo">🔧</span><span class="txt">तुरंत, 4 घंटे के अंदर हल करूँगा!</span></button>
+        <button class="opt" data-c="1" data-right="1" onclick="answer(2,this,'fix_now')"><span class="emo">🔧</span><span class="txt">तुरंत, समय से रीजाल्व करूँगा!</span></button>
         <button class="opt" data-c="2" onclick="answer(2,this,'auto_fix')"><span class="emo">🤷</span><span class="txt">कुछ नहीं — अपने आप ठीक हो जाएगी</span></button>
         <button class="opt" data-c="3" onclick="answer(2,this,'tomorrow')"><span class="emo">😴</span><span class="txt">कल देखेंगे, आज मूड नहीं है</span></button>
         <button class="opt" data-c="4" onclick="answer(2,this,'popcorn')"><span class="emo">🍿</span><span class="txt">पॉपकॉर्न लेकर तमाशा देखूँगा</span></button>
@@ -356,12 +356,12 @@ function startQuiz(){
 // Concept-teaching feedback per question
 var QFB = {
   1: {
-    right: 'बिल्कुल सही! 🎯 अपनी <b>सर्विस SLA को 80% के पार</b> रखें — यानी हर शिकायत 4 घंटे में हल — तभी ₹20,000 की गारंटी पक्की।',
-    wrong: '👇 सही जवाब हरे रंग में है।<br>₹20,000 पाने के लिए अपनी <b>सर्विस SLA को 80% के पार</b> ले जाना है — यानी हर शिकायत 4 घंटे के अंदर हल करें।'
+    right: 'बिल्कुल सही! 🎯 अपनी <b>सर्विस SLA को 80% के पार</b> रखें — यानी हर शिकायत समय से रीजाल्व — तभी ₹20,000 की गारंटी पक्की।',
+    wrong: '👇 सही जवाब हरे रंग में है।<br>₹20,000 पाने के लिए अपनी <b>सर्विस SLA को 80% के पार</b> ले जाना है — यानी हर शिकायत समय से रीजाल्व करें।'
   },
   2: {
-    right: 'बिल्कुल सही! 🎯 शिकायत आते ही <b>4 घंटे में हल</b> करना ही अच्छी सर्विस है — इसी से आपका SLA बढ़ता है।',
-    wrong: '👇 सही जवाब हरे रंग में है।<br>customer की शिकायत आते ही उसे <b>4 घंटे के अंदर हल</b> करना है — इसी से आपकी सर्विस SLA 80% पार होती है।'
+    right: 'बिल्कुल सही! 🎯 शिकायत आते ही <b>समय से रीजाल्व</b> करना ही अच्छी सर्विस है — इसी से आपका SLA बढ़ता है।',
+    wrong: '👇 सही जवाब हरे रंग में है।<br>customer की शिकायत आते ही उसे <b>समय से रीजाल्व</b> करना है — इसी से आपकी सर्विस SLA 80% पार होती है।'
   }
 };
 
