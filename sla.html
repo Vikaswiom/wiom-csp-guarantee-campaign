@@ -118,6 +118,18 @@
   .hero-tag{font-size:18px; font-weight:600; color:var(--muted); text-align:center; line-height:1.5; margin:18px 0 0;}
   .hero-tag b{color:var(--text); font-weight:800;}
 
+  /* Ashish-style colored hero (page 1 only, toggled via .card.hero) */
+  .card.hero{background:linear-gradient(160deg, var(--accent) 0%, #6E1C86 100%);}
+  .card.hero .head{background:transparent;}
+  .card.hero .dot{background:rgba(255,255,255,.32);}
+  .card.hero .dot.on{background:#fff;}
+  .card.hero .hero-amt{color:#fff;}
+  .card.hero .hero-guar{color:#fff;}
+  .card.hero .hero-tag{color:#F3D8EA;}
+  .card.hero .hero-tag b{color:#fff;}
+  .card.hero .btn{background:#fff; color:var(--accent); box-shadow:0 10px 24px rgba(0,0,0,.18);}
+  .card.hero .btn:active{background:#F5E6F0; color:var(--accent-dark);}
+
   /* Section kicker */
   .kicker{font-size:15px; font-weight:800; color:var(--accent); letter-spacing:.3px; text-align:center; margin-bottom:2px;}
 
@@ -182,7 +194,7 @@
 </style>
 </head>
 <body>
-<div class="card">
+<div class="card hero">
 
   <div class="head">
     <div class="brandrow">
@@ -205,7 +217,7 @@
         <div class="shield">🛡️</div>
         <div class="hero-amt">₹20,000</div>
         <div class="hero-guar">की गारंटी।</div>
-        <p class="hero-tag">अगले 2 महीने —<br>बस अपनी <b>Service</b> अच्छी रखें।</p>
+        <p class="hero-tag">अगले 2 महीने —<br>बस अपनी <b>Service समय से resolve</b> करें।</p>
       </div>
       <button class="btn" onclick="goDeal()">और जानें →</button>
     </section>
@@ -315,6 +327,7 @@ var DOT_FOR = {'s-edu':0,'s-deal':1,'s-plan':1,'s-q1':2,'s-q2':2,'s-enroll':3,'s
 function show(id){
   SCREENS.forEach(function(s){ document.getElementById(s).classList.remove('active'); });
   document.getElementById(id).classList.add('active');
+  document.querySelector('.card').classList.toggle('hero', id==='s-edu');
   var upto = DOT_FOR[id];
   for(var i=0;i<4;i++){ document.getElementById('d'+i).classList.toggle('on', i<=upto); }
   document.querySelector('.card').scrollIntoView({block:'start'});
