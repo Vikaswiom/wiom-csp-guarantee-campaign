@@ -334,21 +334,21 @@ function show(id){
 
 /* ---------- Flow ---------- */
 window.addEventListener('DOMContentLoaded', function(){
-  ct('Sehat_View_education', {offer_id:'sehat_mg', step:'education'});
+  ct('Sehat_View_education', {offer_id:'sehat_optical', metric:'Optical Power', step:'education'});
 });
 
 function goDeal(){
-  ct('Sehat_Learn_More', {offer_id:'sehat_mg'});
+  ct('Sehat_Learn_More', {offer_id:'sehat_optical', metric:'Optical Power'});
   show('s-deal');
 }
 
 function goPlan(){
-  ct('Sehat_View_plan', {offer_id:'sehat_mg'});
+  ct('Sehat_View_plan', {offer_id:'sehat_optical', metric:'Optical Power'});
   show('s-plan');
 }
 
 function startQuiz(){
-  ct('Sehat_Start_Quiz', {offer_id:'sehat_mg'});
+  ct('Sehat_Start_Quiz', {offer_id:'sehat_optical', metric:'Optical Power'});
   show('s-q1');
 }
 
@@ -380,15 +380,15 @@ function answer(q, el, choice){
   fb.className = 'feedback ' + (isRight ? 'right' : 'wrong');
   fb.innerHTML = isRight ? QFB[q].right : QFB[q].wrong;
 
-  ct('Sehat_Quiz_Answered', {offer_id:'sehat_mg', question:q, choice:choice, correct:isRight});
+  ct('Sehat_Quiz_Answered', {offer_id:'sehat_optical', metric:'Optical Power', question:q, choice:choice, correct:isRight});
 
   // give more time to read the concept when the answer was wrong
   var delay = isRight ? 1400 : 3200;
   setTimeout(function(){
     if(q === 1){ show('s-q2'); }
     else{
-      ct('Sehat_Quiz_Complete', {offer_id:'sehat_mg'});
-      ct('Sehat_View_enroll', {offer_id:'sehat_mg', step:'enroll'});
+      ct('Sehat_Quiz_Complete', {offer_id:'sehat_optical', metric:'Optical Power'});
+      ct('Sehat_View_enroll', {offer_id:'sehat_optical', metric:'Optical Power', step:'enroll'});
       show('s-enroll');
     }
   }, delay);
@@ -397,7 +397,7 @@ function answer(q, el, choice){
 var didEnroll = false;
 function enroll(){
   if(didEnroll) return; didEnroll = true;
-  ct('Sehat_OptIn', {offer_id:'sehat_mg', enrolled:true});
+  ct('Sehat_OptIn', {offer_id:'sehat_optical', metric:'Optical Power', enrolled:true});
   show('s-done');
 }
 </script>
