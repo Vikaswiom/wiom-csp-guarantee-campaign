@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Sehat MG — CleverTap In-App</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#D9008D; --accent-dark:#B00073; --purple:#443152; --text:#161021;
+    --muted:#665E75; --bg:#F1EDF7; --card:#FFFFFF; --line:#EAE4F2; --soft:#FBF7FD;
+    --green:#008043; --green-bg:#E1FAED; --amber:#B4770A; --amber-bg:#FFF1DC;
+    --red:#E01E00; --red-bg:#FFE9E5; --brand-100:#FFE5F6;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;}
+  body{
+    font-family:'Noto Sans Devanagari','Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,sans-serif;
+    color:var(--text);
+    background:#EFE7F5;
+    min-height:100vh; min-height:100dvh; display:flex; align-items:stretch; justify-content:center;
+    padding:0; line-height:1.55;
+  }
+  .card{
+    width:100%; max-width:460px; background:var(--card);
+    border-radius:0; box-shadow:0 0 60px rgba(68,49,82,.14);
+    overflow:hidden; position:relative;
+    min-height:100vh; min-height:100dvh; display:flex; flex-direction:column;
+  }
+
+  /* Header band */
+  .head{
+    background:linear-gradient(135deg, var(--accent) 0%, #7A1F8F 100%);
+    color:#fff; padding:calc(15px + env(safe-area-inset-top)) 22px 15px; position:relative; flex:0 0 auto;
+  }
+  .brandrow{display:flex; align-items:center; gap:9px;}
+  .logo{font-size:15px; font-weight:800; letter-spacing:.3px;}
+  .pill{margin-left:auto; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
+    font-size:10.5px; font-weight:700; padding:4px 9px; border-radius:20px; letter-spacing:.4px;}
+  .badge{width:52px; height:52px; border-radius:16px; background:rgba(255,255,255,.16);
+    display:flex; align-items:center; justify-content:center; font-size:28px; margin-bottom:12px;
+    border:1px solid rgba(255,255,255,.25);}
+  .htitle{font-size:23px; font-weight:900; line-height:1.2; margin:0; letter-spacing:-.3px;}
+  .amount{font-size:46px; font-weight:900; margin:6px 0 0; letter-spacing:-1.5px; line-height:1;}
+  .amount small{font-size:15px; font-weight:700; opacity:.9; letter-spacing:0;}
+
+  /* Progress dots */
+  .dots{display:flex; gap:6px; padding:14px 22px 0; flex:0 0 auto;}
+  .dot{height:5px; flex:1; border-radius:5px; background:var(--line); transition:.3s;}
+  .dot.on{background:var(--accent);}
+
+  .body{padding:20px 22px calc(24px + env(safe-area-inset-bottom)); flex:1 1 auto; display:flex; flex-direction:column;}
+  .screen{display:none;}
+  .screen.active{display:flex; flex-direction:column; flex:1 1 auto; animation:fade .35s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
+
+  h2{font-size:28px; font-weight:900; margin:8px 0 10px; color:var(--text); line-height:1.2; letter-spacing:-.4px;}
+  p{margin:9px 0; font-size:16px; color:var(--text); font-weight:500;}
+  .muted{color:var(--muted); font-size:15px; font-weight:600;}
+
+  .points{list-style:none; padding:0; margin:16px 0;}
+  .points li{display:flex; gap:13px; align-items:flex-start; margin:13px 0; font-size:17px; font-weight:600; line-height:1.45;}
+  .points .ic{flex:0 0 40px; height:40px; border-radius:12px; display:flex; align-items:center;
+    justify-content:center; font-size:20px;}
+  .ic.pink{background:var(--brand-100);} .ic.green{background:var(--green-bg);}
+  .ic.amber{background:var(--amber-bg);}
+  .points b{font-weight:800;}
+
+  .note{background:var(--soft); border:1px solid var(--line); border-left:4px solid var(--accent);
+    border-radius:10px; padding:11px 13px; font-size:13px; color:var(--purple); margin:14px 0;}
+
+  /* Minimal hero-style screens */
+  .lead-line{font-size:24px; color:var(--text); font-weight:900; line-height:1.25; letter-spacing:-.3px; margin:12px 0 0; text-align:center;}
+  .center{text-align:center;}
+  .hero-emo{font-size:66px; line-height:1; text-align:center; margin:10px 0 4px;}
+  .deal{display:flex; align-items:stretch; gap:10px; margin:22px 0 4px;}
+  .deal .side{flex:1; background:var(--soft); border:2px solid var(--line); border-radius:16px;
+    padding:16px 10px; text-align:center;}
+  .deal .side .e{font-size:34px;}
+  .deal .side .k{font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.5px;
+    color:var(--muted); margin-top:8px;}
+  .deal .side .v{font-size:17px; font-weight:900; margin-top:4px; line-height:1.25;}
+  .deal .side.you{border-color:var(--brand-100); background:var(--brand-100);}
+  .deal .side.you .v{color:var(--accent-dark);}
+  .deal .side.we{border-color:var(--green-bg); background:var(--green-bg);}
+  .deal .side.we .v{color:var(--green);}
+  .deal .mid{display:flex; align-items:center; font-size:22px; color:var(--accent);}
+
+  /* 3-month breakdown */
+  .months{background:var(--soft); border:1px solid var(--line); border-radius:18px; padding:4px 18px; margin:22px 0 0;}
+  .mrow{display:flex; justify-content:space-between; align-items:center; padding:14px 0;
+    border-bottom:1px solid var(--line); font-size:17px; font-weight:700; color:var(--text);}
+  .mrow:last-child{border-bottom:none;}
+  .mrow .m{color:var(--muted); font-weight:700;}
+  .mrow b{font-size:20px; font-weight:900; color:var(--accent-dark); letter-spacing:-.3px;}
+  .mrow.total{border-top:2px solid var(--line);}
+  .mrow.total .m{color:var(--text); font-weight:900;}
+  .mrow.total b{color:var(--green); font-size:23px;}
+  .mrow .m em{display:block; font-size:12.5px; font-weight:700; font-style:normal; color:var(--accent); margin-top:2px;}
+  .finenote{font-size:13.5px; color:var(--muted); font-weight:600; text-align:center; line-height:1.5; margin:12px 4px 0;}
+  .finenote b{color:var(--text); font-weight:800;}
+
+  /* Optical Power range callout */
+  .range{background:var(--green-bg); border:1.5px solid #B5E9CC; border-radius:18px;
+    padding:16px; margin:18px 0 6px; text-align:center;}
+  .range .rt{font-size:14px; font-weight:800; color:var(--text);}
+  .range .rv{font-size:28px; font-weight:900; color:var(--green); margin:6px 0 4px; letter-spacing:-.3px;}
+  .range .rs{font-size:13.5px; font-weight:700; color:var(--muted); line-height:1.5;}
+
+  /* Reference-style hero (page 1) */
+  .hero-center{flex:1 1 auto; display:flex; flex-direction:column; justify-content:center;
+    align-items:center; text-align:center;}
+  .shield{font-size:60px; line-height:1; text-align:center; margin:4px 0 0;}
+  .hero-amt{font-size:62px; font-weight:900; letter-spacing:-2px; line-height:1; text-align:center; color:var(--accent); margin:10px 0 0;}
+  .hero-guar{font-size:26px; font-weight:900; text-align:center; color:var(--text); margin:4px 0 0; letter-spacing:-.3px;}
+  .hero-tag{font-size:18px; font-weight:600; color:var(--muted); text-align:center; line-height:1.5; margin:18px 0 0;}
+  .hero-tag b{color:var(--text); font-weight:800;}
+
+  /* Section kicker */
+  .kicker{font-size:15px; font-weight:800; color:var(--accent); letter-spacing:.3px; text-align:center; margin-bottom:2px;}
+
+  /* Promise exchange (page 2) — vertical, arrow between */
+  .promise{margin:18px 0 2px;}
+  .pcard{border:2px solid var(--line); border-radius:18px; padding:16px 18px 18px;}
+  .pcard.us{background:var(--brand-100); border-color:#F5C4E6;}
+  .pcard.you{background:var(--green-bg); border-color:#B5E9CC;}
+  .pcard .who{display:inline-block; font-size:11.5px; font-weight:800; letter-spacing:.5px; padding:5px 12px; border-radius:999px; color:#fff;}
+  .pcard.us .who{background:var(--accent);}
+  .pcard.you .who{background:var(--green);}
+  .pcard .what{font-size:20px; font-weight:900; line-height:1.3; margin-top:11px; color:var(--text);}
+  .pcard .sub{font-size:13.5px; font-weight:700; color:var(--muted); margin-top:9px; line-height:1.5;}
+  .parrow{width:46px; height:46px; border-radius:50%; background:var(--accent); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:900;
+    margin:-14px auto; position:relative; z-index:2; border:4px solid var(--card); box-shadow:0 6px 16px rgba(217,0,141,.35);}
+
+  /* Reassurance + prompt (page 3) */
+  .reassure{background:var(--green-bg); border-radius:16px; padding:14px 16px; text-align:center;
+    font-size:15.5px; font-weight:800; color:var(--green); margin:18px 0 0; line-height:1.5;}
+  .prompt{text-align:center; font-size:19px; font-weight:900; color:var(--text); margin:22px 0 0; letter-spacing:-.2px;}
+
+  /* Buttons */
+  .btn{display:block; width:100%; border:none; cursor:pointer; font-family:inherit;
+    background:var(--accent); color:#fff; font-size:18px; font-weight:800; padding:18px;
+    border-radius:16px; margin-top:auto; box-shadow:0 8px 20px rgba(217,0,141,.32);
+    transition:transform .12s, background .2s;}
+  .btn:active{transform:translateY(2px) scale(.99); background:var(--accent-dark);}
+  .btn.ghost{background:transparent; color:var(--muted); box-shadow:none; font-weight:700;
+    font-size:13.5px; padding:10px; margin-top:6px;}
+
+  /* Quiz options */
+  .qhint{font-size:15px; color:var(--accent); font-weight:800; letter-spacing:.3px; margin:6px 0 2px;}
+  .opts{margin-top:16px;}
+  .opt{display:flex; align-items:center; gap:14px; width:100%; text-align:left;
+    background:var(--soft); border:2px solid var(--line); border-radius:16px;
+    padding:18px 16px; margin:12px 0; cursor:pointer; font-family:inherit; font-size:18px;
+    font-weight:700; color:var(--text); line-height:1.3; transition:.15s;}
+  .opt .emo{font-size:24px; flex:0 0 auto;}
+  .opt .txt{flex:1; text-align:left;}
+  .opt:active{transform:scale(.99);}
+  .opt.pick{border-color:var(--accent); background:var(--brand-100); color:var(--accent-dark);}
+  .opt.correct{border-color:var(--green); background:var(--green-bg); color:var(--green);}
+  .opt.correct::after{content:'✓'; margin-left:auto; color:var(--green); font-weight:900; font-size:22px;}
+  .feedback{font-size:15px; font-weight:700; text-align:center; margin-top:14px; min-height:22px;
+    line-height:1.5; padding:0 4px;}
+  .feedback.wrong{background:var(--amber-bg); border-radius:12px; padding:12px 14px; color:var(--text);}
+  .feedback.wrong b{color:var(--accent-dark); font-weight:900;}
+  .feedback.right{color:var(--green); font-weight:800;}
+
+  /* Done screen */
+  .done{text-align:center; padding:10px 0; flex:1 1 auto; display:flex; flex-direction:column; justify-content:center;}
+  .done .btn{margin-top:26px;}
+  .done .big{font-size:64px; line-height:1; margin:6px 0 8px;}
+  .done h2{color:var(--green); font-size:32px; font-weight:900; line-height:1.15; letter-spacing:-.4px;}
+  .tick{width:74px; height:74px; border-radius:50%; background:var(--green-bg);
+    display:flex; align-items:center; justify-content:center; font-size:38px; margin:6px auto 10px;}
+  .chip{display:inline-block; background:var(--green-bg); color:var(--green); font-weight:800;
+    font-size:13px; padding:6px 14px; border-radius:20px; margin-top:8px;}
+
+  .foot{text-align:center; font-size:11px; color:var(--muted); padding:0 22px 16px;}
+</style>
+</head>
+<body>
+<div class="card">
+
+  <div class="head">
+    <div class="brandrow">
+      <span class="logo">Wiom</span>
+    </div>
+  </div>
+
+  <div class="dots">
+    <div class="dot on" id="d0"></div>
+    <div class="dot" id="d1"></div>
+    <div class="dot" id="d2"></div>
+    <div class="dot" id="d3"></div>
+  </div>
+
+  <div class="body">
+
+    <!-- SCREEN 0 · HERO -->
+    <section class="screen active" id="s-edu">
+      <div class="hero-center">
+        <div class="shield">🛡️</div>
+        <div class="hero-amt">₹25,000</div>
+        <div class="hero-guar">की गारंटी।</div>
+        <p class="hero-tag">अगले 3 महीने —<br>बस अपनी <b>Optical Power</b> सही रखें।</p>
+      </div>
+      <button class="btn" onclick="goDeal()">और जानें →</button>
+    </section>
+
+    <!-- SCREEN 1 · सीधा हिसाब (promise exchange) -->
+    <section class="screen" id="s-deal">
+      <div class="kicker">सीधा हिसाब</div>
+      <h2 class="center">एक वादा हमारा,<br>एक वादा आपका।</h2>
+      <div class="promise">
+        <div class="pcard us">
+          <span class="who">हमारा वादा</span>
+          <div class="what">₹25,000 सुरक्षित — पूरे 3 महीने।</div>
+        </div>
+        <div class="parrow">⇅</div>
+        <div class="pcard you">
+          <span class="who">आपका वादा</span>
+          <div class="what">अपनी Optical Power 80% के पार रखें।</div>
+          <div class="sub">हर connection −8 से −25 dBm = सही signal ✅</div>
+        </div>
+      </div>
+      <button class="btn" onclick="goPlan()">गारंटी की डिटेल देखें →</button>
+    </section>
+
+    <!-- SCREEN 2 · हर महीने सुरक्षित (monthly plan) -->
+    <section class="screen" id="s-plan">
+      <div class="kicker">हर महीने सुरक्षित</div>
+      <h2 class="center">3 महीने में ₹25,000</h2>
+      <div class="months">
+        <div class="mrow"><span class="m">जुलाई में <em>~15 दिन (आधा महीना)</em></span><b>₹5,000</b></div>
+        <div class="mrow"><span class="m">अगस्त में <em>पूरा महीना</em></span><b>₹10,000</b></div>
+        <div class="mrow"><span class="m">सितंबर में <em>पूरा महीना</em></span><b>₹10,000</b></div>
+        <div class="mrow total"><span class="m">3 महीने में</span><b>₹25,000</b></div>
+      </div>
+      <div class="reassure">बस अपना network स्वस्थ रखें।</div>
+      <div class="prompt">स्कीम से जुड़ना चाहेंगे?</div>
+      <button class="btn" onclick="startQuiz()">सवाल-जवाब शुरू करें →</button>
+    </section>
+
+    <!-- SCREEN 1 · QUIZ Q1 -->
+    <section class="screen" id="s-q1">
+      <div class="qhint">सवाल 1 / 2</div>
+      <h2>₹25,000 पाने के लिए आपको क्या करना है? 🤔</h2>
+      <div class="opts" id="q1opts">
+        <button class="opt" data-c="1" data-right="1" onclick="answer(1,this,'network_health')"><span class="emo">💪</span><span class="txt">अपनी network सेहत (Optical Power) 80% पार रखनी है</span></button>
+        <button class="opt" data-c="2" onclick="answer(1,this,'lottery')"><span class="emo">🎰</span><span class="txt">लॉटरी का टिकट खरीदना है</span></button>
+        <button class="opt" data-c="3" onclick="answer(1,this,'pray')"><span class="emo">🙏</span><span class="txt">रोज़ भगवान से प्रार्थना करनी है</span></button>
+        <button class="opt" data-c="4" onclick="answer(1,this,'sleep')"><span class="emo">😴</span><span class="txt">कुछ नहीं, बस आराम से सोना है</span></button>
+      </div>
+      <div class="feedback" id="fb1"></div>
+    </section>
+
+    <!-- SCREEN 2 · QUIZ Q2 -->
+    <section class="screen" id="s-q2">
+      <div class="qhint">सवाल 2 / 2</div>
+      <h2>Customer की Optical Power<br>खराब है — आप क्या करेंगे? 🔦</h2>
+      <div class="opts" id="q2opts">
+        <button class="opt" data-c="1" data-right="1" onclick="answer(2,this,'fix_now')"><span class="emo">🔧</span><span class="txt">तुरंत जाकर ठीक करूँगा!</span></button>
+        <button class="opt" data-c="2" onclick="answer(2,this,'auto_fix')"><span class="emo">🤷</span><span class="txt">कुछ नहीं — अपने आप ठीक हो जाएगा</span></button>
+        <button class="opt" data-c="3" onclick="answer(2,this,'tomorrow')"><span class="emo">😴</span><span class="txt">कल देखेंगे, आज मूड नहीं है</span></button>
+        <button class="opt" data-c="4" onclick="answer(2,this,'popcorn')"><span class="emo">🍿</span><span class="txt">पॉपकॉर्न लेकर तमाशा देखूँगा</span></button>
+      </div>
+      <div class="feedback" id="fb2"></div>
+    </section>
+
+    <!-- SCREEN 3 · ENROLL -->
+    <section class="screen" id="s-enroll">
+      <div class="hero-emo">🎉</div>
+      <h2 class="center">शाबाश! अब बस एक टैप</h2>
+      <p class="lead-line">₹25,000 की गारंटी<br>आपके नाम — आज से।</p>
+      <button class="btn" onclick="enroll()">हाँ, मैं शामिल हूँ ✅</button>
+    </section>
+
+    <!-- SCREEN 4 · DONE -->
+    <section class="screen" id="s-done">
+      <div class="done">
+        <div class="big">💚</div>
+        <h2>बधाई हो! आप जुड़ गए</h2>
+        <p class="lead-line">रोज़ ऐप में अपनी सेहत देखें,<br>₹25,000 की तरफ़ बढ़ें।</p>
+        <span class="chip">प्रोग्राम में शामिल ✓</span>
+        <button class="btn" onclick="closeInApp()">ठीक है</button>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+/* ---------- CleverTap event bridge (safe in plain browser too) ---------- */
+function ct(name, props){
+  try{
+    if(window.CleverTap && typeof window.CleverTap.pushEvent === 'function'){
+      window.CleverTap.pushEvent(name, props || {});
+    }
+    // console.log('CT event:', name, props||{});
+  }catch(e){}
+}
+function closeInApp(){
+  try{
+    if(window.CleverTap && typeof window.CleverTap.dismissInAppNotification === 'function'){
+      window.CleverTap.dismissInAppNotification();
+    }
+  }catch(e){}
+}
+
+/* ---------- Screen navigation + progress ---------- */
+var SCREENS = ['s-edu','s-deal','s-plan','s-q1','s-q2','s-enroll','s-done'];
+var DOT_FOR = {'s-edu':0,'s-deal':1,'s-plan':1,'s-q1':2,'s-q2':2,'s-enroll':3,'s-done':3};
+function show(id){
+  SCREENS.forEach(function(s){ document.getElementById(s).classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  var upto = DOT_FOR[id];
+  for(var i=0;i<4;i++){ document.getElementById('d'+i).classList.toggle('on', i<=upto); }
+  document.querySelector('.card').scrollIntoView({block:'start'});
+}
+
+/* ---------- Flow ---------- */
+window.addEventListener('DOMContentLoaded', function(){
+  ct('Sehat_View_education', {offer_id:'sehat_mg', step:'education'});
+});
+
+function goDeal(){
+  ct('Sehat_Learn_More', {offer_id:'sehat_mg'});
+  show('s-deal');
+}
+
+function goPlan(){
+  ct('Sehat_View_plan', {offer_id:'sehat_mg'});
+  show('s-plan');
+}
+
+function startQuiz(){
+  ct('Sehat_Start_Quiz', {offer_id:'sehat_mg'});
+  show('s-q1');
+}
+
+// Concept-teaching feedback per question
+var QFB = {
+  1: {
+    right: 'बिल्कुल सही! 🎯 अपनी network सेहत (Optical Power) को <b>80% के पार</b> रखें — तभी ₹25,000 की गारंटी पक्की।',
+    wrong: '👇 सही जवाब हरे रंग में है।<br>₹25,000 पाने के लिए अपनी network सेहत यानी <b>Optical Power को 80% के पार</b> ले जाना है — बाकी कोई रास्ता नहीं।'
+  },
+  2: {
+    right: 'बिल्कुल सही! 🎯 Optical Power खराब हो तो <b>तुरंत जाकर ठीक करना</b> ही network का इलाज है — इसी से सेहत बढ़ती है।',
+    wrong: '👇 सही जवाब हरे रंग में है।<br>किसी customer की Optical Power खराब हो तो उसे <b>तुरंत ठीक करना</b> है — यही network का इलाज है, और इसी से आपकी Optical Power 80% पार होती है।'
+  }
+};
+
+var answered = {1:false, 2:false};
+function answer(q, el, choice){
+  if(answered[q]) return;
+  answered[q] = true;
+  var isRight = el.getAttribute('data-right') === '1';
+  // lock all options, reveal the correct one
+  var box = document.getElementById('q'+q+'opts');
+  box.querySelectorAll('.opt').forEach(function(o){
+    o.style.pointerEvents = 'none';
+    if(o.getAttribute('data-right') === '1') o.classList.add('correct');
+  });
+  if(!isRight) el.classList.add('pick');
+  var fb = document.getElementById('fb'+q);
+  fb.className = 'feedback ' + (isRight ? 'right' : 'wrong');
+  fb.innerHTML = isRight ? QFB[q].right : QFB[q].wrong;
+
+  ct('Sehat_Quiz_Answered', {offer_id:'sehat_mg', question:q, choice:choice, correct:isRight});
+
+  // give more time to read the concept when the answer was wrong
+  var delay = isRight ? 1400 : 3200;
+  setTimeout(function(){
+    if(q === 1){ show('s-q2'); }
+    else{
+      ct('Sehat_Quiz_Complete', {offer_id:'sehat_mg'});
+      ct('Sehat_View_enroll', {offer_id:'sehat_mg', step:'enroll'});
+      show('s-enroll');
+    }
+  }, delay);
+}
+
+var didEnroll = false;
+function enroll(){
+  if(didEnroll) return; didEnroll = true;
+  ct('Sehat_OptIn', {offer_id:'sehat_mg', enrolled:true});
+  show('s-done');
+}
+</script>
+</body>
+</html>
