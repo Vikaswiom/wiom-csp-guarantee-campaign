@@ -4,6 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Sehat MG — CleverTap In-App</title>
+<!--
+  IMPORTANT (CleverTap custom HTML):
+  Never use "//" single-line comments in the script block below.
+  CleverTap's editor / copy-paste can collapse this file onto one line,
+  and a "//" comment then swallows all code after it on that line,
+  breaking the whole script (buttons stop working).
+  Use block comments only.
+-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -305,17 +313,24 @@
 <script>
 /* ---------- CleverTap event bridge (safe in plain browser too) ---------- */
 function ct(name, props){
+  props = props || {};
   try{
     if(window.CleverTap && typeof window.CleverTap.pushEvent === 'function'){
-      window.CleverTap.pushEvent(name, props || {});
+      /* Android: the bridge is a Java interface — properties MUST be a JSON string, not a JS object */
+      window.CleverTap.pushEvent(name, JSON.stringify(props));
+    } else if(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.clevertap){
+      /* iOS: WKWebView bridge */
+      window.webkit.messageHandlers.clevertap.postMessage({action:'recordEventWithProps', event:name, properties:props});
     }
-    // console.log('CT event:', name, props||{});
+    /* console.log('CT event:', name, props); */
   }catch(e){}
 }
 function closeInApp(){
   try{
     if(window.CleverTap && typeof window.CleverTap.dismissInAppNotification === 'function'){
       window.CleverTap.dismissInAppNotification();
+    } else if(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.clevertap){
+      window.webkit.messageHandlers.clevertap.postMessage({action:'dismissInAppNotification'});
     }
   }catch(e){}
 }
@@ -352,7 +367,7 @@ function startQuiz(){
   show('s-q1');
 }
 
-// Concept-teaching feedback per question
+/* Concept-teaching feedback per question */
 var QFB = {
   1: {
     right: 'बिल्कुल सही! 🎯 अपनी नेटवर्क सेहत (Optical Power) को <b>80% के पार</b> रखें — तभी ₹20,000 की गारंटी पक्की।',
@@ -369,7 +384,7 @@ function answer(q, el, choice){
   if(answered[q]) return;
   answered[q] = true;
   var isRight = el.getAttribute('data-right') === '1';
-  // lock all options, reveal the correct one
+  /* lock all options, reveal the correct one */
   var box = document.getElementById('q'+q+'opts');
   box.querySelectorAll('.opt').forEach(function(o){
     o.style.pointerEvents = 'none';
@@ -382,7 +397,7 @@ function answer(q, el, choice){
 
   ct('Sehat_Quiz_Answered', {offer_id:'sehat_optical', metric:'Optical Power', question:q, choice:choice, correct:isRight});
 
-  // give more time to read the concept when the answer was wrong
+  /* give more time to read the concept when the answer was wrong */
   var delay = isRight ? 1400 : 3200;
   setTimeout(function(){
     if(q === 1){ show('s-q2'); }
