@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-16 06:45",
+  "generated": "2026-07-16 11:26",
   "sample": false,
   "region": "eu1",
   "funnel_steps": [
@@ -41,18 +41,18 @@
       "color": "#D9008D",
       "eligible": 53,
       "funnel": {
-        "reached": 36,
-        "learn_more": 31,
-        "view_plan": 30,
-        "start_quiz": 28,
-        "quiz_complete": 23,
-        "enrolled": 23
+        "reached": 48,
+        "learn_more": 41,
+        "view_plan": 40,
+        "start_quiz": 39,
+        "quiz_complete": 34,
+        "enrolled": 34
       },
       "quiz": {
-        "q1_correct": 21,
-        "q1_total": 23,
-        "q2_correct": 20,
-        "q2_total": 23
+        "q1_correct": 30,
+        "q1_total": 34,
+        "q2_correct": 31,
+        "q2_total": 34
       },
       "daily": [
         {
@@ -62,8 +62,8 @@
         },
         {
           "date": "2026-07-16",
-          "reached": 35,
-          "enrolled": 22
+          "reached": 47,
+          "enrolled": 33
         }
       ]
     },
@@ -73,24 +73,24 @@
       "color": "#2563EB",
       "eligible": 32,
       "funnel": {
-        "reached": 12,
-        "learn_more": 10,
-        "view_plan": 10,
-        "start_quiz": 8,
-        "quiz_complete": 7,
-        "enrolled": 7
+        "reached": 25,
+        "learn_more": 18,
+        "view_plan": 17,
+        "start_quiz": 16,
+        "quiz_complete": 15,
+        "enrolled": 15
       },
       "quiz": {
-        "q1_correct": 6,
-        "q1_total": 7,
-        "q2_correct": 7,
-        "q2_total": 7
+        "q1_correct": 13,
+        "q1_total": 15,
+        "q2_correct": 15,
+        "q2_total": 15
       },
       "daily": [
         {
           "date": "2026-07-16",
-          "reached": 12,
-          "enrolled": 7
+          "reached": 25,
+          "enrolled": 15
         }
       ]
     }
