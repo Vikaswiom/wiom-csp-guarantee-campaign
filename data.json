@@ -39,6 +39,7 @@
       "key": "sehat_optical",
       "label": "Optical Power",
       "color": "#D9008D",
+      "eligible": 53,
       "funnel": {
         "reached": 36,
         "learn_more": 31,
@@ -70,6 +71,7 @@
       "key": "sehat_sla",
       "label": "Service SLA",
       "color": "#2563EB",
+      "eligible": 32,
       "funnel": {
         "reached": 12,
         "learn_more": 10,

@@ -26,6 +26,9 @@ import os, sys, json, time, datetime, urllib.request, urllib.error
 START_DATE = "20260715"                      # campaign launch (YYYYMMDD); override via argv[1]
 OFFERS = {"sehat_optical": "Optical Power", "sehat_sla": "Service SLA"}
 COLORS = {"sehat_optical": "#D9008D", "sehat_sla": "#2563EB"}
+# eligible / addressable cohort per campaign (CSPs the campaign is live for).
+# Not a CleverTap metric — set manually; forms the funnel baseline (coverage %).
+ELIGIBLE = {"sehat_optical": 53, "sehat_sla": 32}
 # funnel event name -> data key
 FUNNEL = [
     ("Sehat_View_education", "reached"),
@@ -148,7 +151,8 @@ def main():
                        "reached": len(daily[o][d]["reached"]),
                        "enrolled": len(daily[o][d]["enrolled"])} for d in days if len(d) == 8]
         campaigns.append({
-            "key": o, "label": label, "color": COLORS[o], "funnel": funnel,
+            "key": o, "label": label, "color": COLORS[o],
+            "eligible": ELIGIBLE.get(o, 0), "funnel": funnel,
             "quiz": {"q1_correct": len(quiz[o]["q1c"]), "q1_total": len(quiz[o]["q1t"]),
                      "q2_correct": len(quiz[o]["q2c"]), "q2_total": len(quiz[o]["q2t"])},
             "daily": daily_list,
@@ -165,7 +169,9 @@ def main():
     print("wrote", path)
     for c in campaigns:
         f = c["funnel"]; rate = round(100 * f["enrolled"] / f["reached"]) if f["reached"] else 0
-        print(f"  {c['label']:14s} reached={f['reached']:4d}  enrolled={f['enrolled']:4d}  opt-in={rate}%")
+        el = c["eligible"]; cov = round(100 * f["reached"] / el) if el else 0
+        print(f"  {c['label']:14s} eligible={el:4d}  reached={f['reached']:4d} ({cov}% cov)  "
+              f"enrolled={f['enrolled']:4d}  opt-in={rate}%")
 
 if __name__ == "__main__":
     main()
