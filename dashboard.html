@@ -168,7 +168,7 @@ function render(D){
         <div class="cell"><div class="cl">Reached</div><div class="cv">${nf(f.reached)}</div></div>
         <div class="cell"><div class="cl">Enrolled</div><div class="cv">${nf(f.enrolled)}</div></div>
         <div class="cell"><div class="cl">Opt-in rate</div><div class="cv rate" style="color:${c.color}">${pct(f.enrolled,f.reached)}%</div></div>
-        <div class="cell"><div class="cl">Seen, not enrolled</div><div class="cv">${nf(f.quiz_complete-f.enrolled)}</div></div>
+        <div class="cell"><div class="cl">Seen, not enrolled</div><div class="cv">${nf(f.reached-f.enrolled)} <small>of ${nf(f.reached)} seen</small></div></div>
       </div></div>`;
   }).join('');
 
