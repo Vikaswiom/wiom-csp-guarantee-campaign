@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-16 11:57",
+  "generated": "2026-07-16 06:45",
   "sample": false,
   "region": "eu1",
   "funnel_steps": [
@@ -40,18 +40,18 @@
       "label": "Optical Power",
       "color": "#D9008D",
       "funnel": {
-        "reached": 30,
-        "learn_more": 25,
-        "view_plan": 24,
-        "start_quiz": 22,
-        "quiz_complete": 18,
-        "enrolled": 18
+        "reached": 36,
+        "learn_more": 31,
+        "view_plan": 30,
+        "start_quiz": 28,
+        "quiz_complete": 23,
+        "enrolled": 23
       },
       "quiz": {
-        "q1_correct": 17,
-        "q1_total": 18,
-        "q2_correct": 16,
-        "q2_total": 18
+        "q1_correct": 21,
+        "q1_total": 23,
+        "q2_correct": 20,
+        "q2_total": 23
       },
       "daily": [
         {
@@ -61,8 +61,8 @@
         },
         {
           "date": "2026-07-16",
-          "reached": 29,
-          "enrolled": 17
+          "reached": 35,
+          "enrolled": 22
         }
       ]
     },
@@ -71,10 +71,10 @@
       "label": "Service SLA",
       "color": "#2563EB",
       "funnel": {
-        "reached": 10,
-        "learn_more": 8,
-        "view_plan": 8,
-        "start_quiz": 7,
+        "reached": 12,
+        "learn_more": 10,
+        "view_plan": 10,
+        "start_quiz": 8,
         "quiz_complete": 7,
         "enrolled": 7
       },
@@ -87,7 +87,7 @@
       "daily": [
         {
           "date": "2026-07-16",
-          "reached": 10,
+          "reached": 12,
           "enrolled": 7
         }
       ]
