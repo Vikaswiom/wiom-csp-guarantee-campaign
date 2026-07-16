@@ -23,7 +23,7 @@ Then:  git commit -am "refresh dashboard" && git push   (GitHub Pages serves dat
 import os, sys, json, time, datetime, urllib.request, urllib.error
 
 # ---- config -----------------------------------------------------------------
-START_DATE = "20260716"                      # campaign launch (YYYYMMDD); override via argv[1]
+START_DATE = "20260715"                      # campaign launch (YYYYMMDD); override via argv[1]
 OFFERS = {"sehat_optical": "Optical Power", "sehat_sla": "Service SLA"}
 COLORS = {"sehat_optical": "#D9008D", "sehat_sla": "#2563EB"}
 # funnel event name -> data key
