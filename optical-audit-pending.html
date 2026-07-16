@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Sehat MG — Optical Power (Audit Not Done)</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#D9008D;--accent-dark:#B00073;--purple:#443152;--text:#161021;--muted:#665E75;--bg:#F1EDF7;--card:#FFFFFF;--line:#EAE4F2;--soft:#FBF7FD;--green:#008043;--green-bg:#E1FAED;--amber:#B4770A;--amber-bg:#FFF1DC;--red:#E01E00;--red-bg:#FFE9E5;--brand-100:#FFE5F6;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;}
+body{font-family:'Noto Sans Devanagari','Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,sans-serif;color:var(--text);background:#EFE7F5;min-height:100vh;min-height:100dvh;display:flex;align-items:stretch;justify-content:center;padding:0;line-height:1.55;}
+.card{width:100%;max-width:460px;background:var(--card);border-radius:0;box-shadow:0 0 60px rgba(68,49,82,.14);overflow:hidden;position:relative;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;}
+.head{background:linear-gradient(135deg,var(--accent) 0%,#7A1F8F 100%);color:#fff;padding:calc(15px + env(safe-area-inset-top)) 22px 15px;position:relative;flex:0 0 auto;}
+.brandrow{display:flex;align-items:center;gap:9px;}
+.logo{font-size:15px;font-weight:800;letter-spacing:.3px;}
+.dots{display:flex;gap:6px;padding:14px 22px 0;flex:0 0 auto;}
+.dot{height:5px;flex:1;border-radius:5px;background:var(--line);transition:.3s;}
+.dot.on{background:var(--accent);}
+.body{padding:20px 22px calc(24px + env(safe-area-inset-bottom));flex:1 1 auto;display:flex;flex-direction:column;}
+.screen{display:none;}
+.screen.active{display:flex;flex-direction:column;flex:1 1 auto;animation:fade .35s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+h2{font-size:28px;font-weight:900;margin:8px 0 10px;color:var(--text);line-height:1.2;letter-spacing:-.4px;}
+p{margin:9px 0;font-size:16px;color:var(--text);font-weight:500;}
+.muted{color:var(--muted);font-size:15px;font-weight:600;}
+.lead-line{font-size:24px;color:var(--text);font-weight:900;line-height:1.25;letter-spacing:-.3px;margin:12px 0 0;text-align:center;}
+.center{text-align:center;}
+.hero-emo{font-size:66px;line-height:1;text-align:center;margin:10px 0 4px;}
+.months{background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:4px 18px;margin:22px 0 0;}
+.mrow{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);font-size:17px;font-weight:700;color:var(--text);}
+.mrow:last-child{border-bottom:none;}
+.mrow .m{color:var(--muted);font-weight:700;}
+.mrow b{font-size:20px;font-weight:900;color:var(--accent-dark);letter-spacing:-.3px;}
+.mrow.total{border-top:2px solid var(--line);}
+.mrow.total .m{color:var(--text);font-weight:900;}
+.mrow.total b{color:var(--green);font-size:23px;}
+.mrow .m em{display:block;font-size:12.5px;font-weight:700;font-style:normal;color:var(--accent);margin-top:2px;}
+.hero-center{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.shield{font-size:60px;line-height:1;text-align:center;margin:4px 0 0;}
+.hero-amt{font-size:62px;font-weight:900;letter-spacing:-2px;line-height:1;text-align:center;color:var(--accent);margin:10px 0 0;}
+.hero-guar{font-size:26px;font-weight:900;text-align:center;color:var(--text);margin:4px 0 0;letter-spacing:-.3px;}
+.hero-tag{font-size:18px;font-weight:600;color:var(--muted);text-align:center;line-height:1.5;margin:18px 0 0;}
+.hero-tag b{color:var(--text);font-weight:800;}
+.card.hero{background:linear-gradient(160deg,var(--accent) 0%,#6E1C86 100%);}
+.card.hero .head{background:transparent;}
+.card.hero .dot{background:rgba(255,255,255,.32);}
+.card.hero .dot.on{background:#fff;}
+.card.hero .hero-amt{color:#fff;}
+.card.hero .hero-guar{color:#fff;}
+.card.hero .hero-tag{color:#F3D8EA;}
+.card.hero .hero-tag b{color:#fff;}
+.card.hero .btn{background:#fff;color:var(--accent);box-shadow:0 10px 24px rgba(0,0,0,.18);}
+.card.hero .btn:active{background:#F5E6F0;color:var(--accent-dark);}
+.kicker{font-size:15px;font-weight:800;color:var(--accent);letter-spacing:.3px;text-align:center;margin-bottom:2px;}
+.promise{margin:18px 0 2px;}
+.pcard{border:2px solid var(--line);border-radius:18px;padding:16px 18px 18px;}
+.pcard.us{background:var(--brand-100);border-color:#F5C4E6;}
+.pcard.you{background:var(--green-bg);border-color:#B5E9CC;}
+.pcard .who{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.5px;padding:5px 12px;border-radius:999px;color:#fff;}
+.pcard.us .who{background:var(--accent);}
+.pcard.you .who{background:var(--green);}
+.pcard .what{font-size:20px;font-weight:900;line-height:1.3;margin-top:11px;color:var(--text);}
+.pcard .sub{font-size:13.5px;font-weight:700;color:var(--muted);margin-top:9px;line-height:1.5;}
+.parrow{width:46px;height:46px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;margin:-14px auto;position:relative;z-index:2;border:4px solid var(--card);box-shadow:0 6px 16px rgba(217,0,141,.35);}
+.reassure{background:var(--green-bg);border-radius:16px;padding:14px 16px;text-align:center;font-size:15.5px;font-weight:800;color:var(--green);margin:18px 0 0;line-height:1.5;}
+.prompt{text-align:center;font-size:19px;font-weight:900;color:var(--text);margin:22px 0 0;letter-spacing:-.2px;}
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:inherit;background:var(--accent);color:#fff;font-size:18px;font-weight:800;padding:18px;border-radius:16px;margin-top:auto;box-shadow:0 8px 20px rgba(217,0,141,.32);transition:transform .12s,background .2s;}
+.btn:active{transform:translateY(2px) scale(.99);background:var(--accent-dark);}
+.btn:disabled{opacity:.6;}
+.qhint{font-size:15px;color:var(--accent);font-weight:800;letter-spacing:.3px;margin:6px 0 2px;}
+.opts{margin-top:16px;}
+.opt{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--soft);border:2px solid var(--line);border-radius:16px;padding:18px 16px;margin:12px 0;cursor:pointer;font-family:inherit;font-size:18px;font-weight:700;color:var(--text);line-height:1.3;transition:.15s;}
+.opt .emo{font-size:24px;flex:0 0 auto;}
+.opt .txt{flex:1;text-align:left;}
+.opt:active{transform:scale(.99);}
+.opt.pick{border-color:var(--accent);background:var(--brand-100);color:var(--accent-dark);}
+.opt.correct{border-color:var(--green);background:var(--green-bg);color:var(--green);}
+.opt.correct::after{content:'✓';margin-left:auto;color:var(--green);font-weight:900;font-size:22px;}
+.feedback{font-size:15px;font-weight:700;text-align:center;margin-top:14px;min-height:22px;line-height:1.5;padding:0 4px;}
+.feedback.wrong{background:var(--amber-bg);border-radius:12px;padding:12px 14px;color:var(--text);}
+.feedback.wrong b{color:var(--accent-dark);font-weight:900;}
+.feedback.right{color:var(--green);font-weight:800;}
+.done{text-align:center;padding:10px 0;flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;}
+.done .btn{margin-top:26px;}
+.done .big{font-size:64px;line-height:1;margin:6px 0 8px;}
+.done h2{color:var(--green);font-size:32px;font-weight:900;line-height:1.15;letter-spacing:-.4px;}
+.audit-emo{font-size:56px;text-align:center;margin:6px 0 0;}
+.infobox{background:var(--amber-bg);border:1.5px solid #F3D9A6;border-radius:16px;padding:16px;margin:18px 0 6px;}
+.infobox .it{font-size:15px;font-weight:800;color:var(--amber);}
+.infobox .ib{font-size:14px;color:var(--text);font-weight:600;line-height:1.55;margin-top:8px;}
+.proc-wrap{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.spin{width:64px;height:64px;border-radius:50%;border:6px solid var(--line);border-top-color:var(--accent);animation:spin 1s linear infinite;margin:0 auto 6px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.pendmsg{font-size:14px;font-weight:700;color:var(--amber);text-align:center;margin-top:16px;min-height:18px;line-height:1.4;padding:0 10px;}
+</style>
+</head>
+<body>
+
+<!-- ===== PER-CSP TOKENS (Optical, Audit-NOT-Done). sehat_pid = partner_id; sehat_audit_url = the CSP's magic-login audit link. If either renders literal text, DELETE the {{...}} and re-insert via the editor's @ button (e.g. @Profile - sehat_pid | default: "" ). ===== -->
+<span id="pid" style="display:none">{{ Profile.sehat_pid | default: "" }}</span>
+<span id="au" style="display:none">{{ Profile.sehat_audit_url | default: "" }}</span>
+
+<div class="card hero">
+<div class="head"><div class="brandrow"><span class="logo">Wiom</span></div></div>
+<div class="dots"><div class="dot on" id="d0"></div><div class="dot" id="d1"></div><div class="dot" id="d2"></div><div class="dot" id="d3"></div></div>
+<div class="body">
+
+<section class="screen active" id="s-edu" data-s="0"><div class="hero-center"><div class="shield">🛡️</div><div class="hero-amt">₹20,000</div><div class="hero-guar">की गारंटी।</div><p class="hero-tag">अगले 2 महीने —<br>बस अपनी <b>Optical Power</b> सही रखें।</p></div><button class="btn" data-act="deal">और जानें →</button></section>
+
+<section class="screen" id="s-deal" data-s="1"><div class="kicker">सीधा हिसाब</div><h2 class="center">एक वादा हमारा,<br>एक वादा आपका।</h2><div class="promise"><div class="pcard us"><span class="who">हमारा वादा</span><div class="what">₹20,000 सुरक्षित — पूरे 2 महीने।</div></div><div class="parrow">⇅</div><div class="pcard you"><span class="who">आपका वादा</span><div class="what">अपनी Optical Power 80% के पार रखें।</div><div class="sub">हर कनेक्शन −8 से −25 dBm = सही सिग्नल ✅</div></div></div><button class="btn" data-act="plan">गारंटी की डिटेल देखें →</button></section>
+
+<section class="screen" id="s-plan" data-s="2"><div class="kicker">हर महीने सुरक्षित</div><h2 class="center">2 महीने में ₹20,000</h2><div class="months"><div class="mrow"><span class="m">15 अगस्त को <em>पहली पेमेंट</em></span><b>₹10,000</b></div><div class="mrow"><span class="m">15 सितंबर को <em>दूसरी पेमेंट</em></span><b>₹10,000</b></div><div class="mrow total"><span class="m">कुल गारंटी</span><b>₹20,000</b></div></div><div class="reassure">बस अपना नेटवर्क स्वस्थ रखें।</div><div class="prompt">स्कीम से जुड़ना चाहेंगे?</div><button class="btn" data-act="quiz">सवाल-जवाब शुरू करें →</button></section>
+
+<section class="screen" id="s-q1" data-s="3"><div class="qhint">सवाल 1 / 2</div><h2>₹20,000 पाने के लिए आपको क्या करना है? 🤔</h2><div class="opts" id="q1opts"><button class="opt" data-q="1" data-right="1" data-choice="network_health"><span class="emo">💪</span><span class="txt">अपनी नेटवर्क सेहत (Optical Power) 80% पार रखनी है</span></button><button class="opt" data-q="1" data-choice="lottery"><span class="emo">🎰</span><span class="txt">लॉटरी का टिकट खरीदना है</span></button><button class="opt" data-q="1" data-choice="pray"><span class="emo">🙏</span><span class="txt">रोज़ भगवान से प्रार्थना करनी है</span></button><button class="opt" data-q="1" data-choice="sleep"><span class="emo">😴</span><span class="txt">कुछ नहीं, बस आराम से सोना है</span></button></div><div class="feedback" id="fb1"></div></section>
+
+<section class="screen" id="s-q2" data-s="4"><div class="qhint">सवाल 2 / 2</div><h2>कनेक्शन की Optical Power<br>खराब है — आप क्या करेंगे? 🔦</h2><div class="opts" id="q2opts"><button class="opt" data-q="2" data-right="1" data-choice="fix_now"><span class="emo">🔧</span><span class="txt">तुरंत जाकर ठीक करूँगा!</span></button><button class="opt" data-q="2" data-choice="auto_fix"><span class="emo">🤷</span><span class="txt">कुछ नहीं — अपने आप ठीक हो जाएगा</span></button><button class="opt" data-q="2" data-choice="tomorrow"><span class="emo">😴</span><span class="txt">कल देखेंगे, आज मूड नहीं है</span></button><button class="opt" data-q="2" data-choice="popcorn"><span class="emo">🍿</span><span class="txt">पॉपकॉर्न लेकर तमाशा देखूँगा</span></button></div><div class="feedback" id="fb2"></div></section>
+
+<section class="screen" id="s-audit" data-s="6"><div class="audit-emo">📋</div><div class="kicker">एक छोटा कदम बाकी है</div><h2 class="center">पहले अपना ऑडिट पूरा करें।</h2><div class="infobox"><div class="it">⚠️ ऑडिट अभी बाकी है</div><div class="ib">अपने नेटबॉक्स की जानकारी जाँचें और ऑडिट पूरा करें। यह एक बार का छोटा कदम है — इसके बाद ₹20,000 की गारंटी अनलॉक हो जाएगी।</div></div><button class="btn" data-act="openAudit">ऑडिट पूरा करें →</button></section>
+
+<section class="screen" id="s-proc" data-s="7"><div class="proc-wrap"><div class="spin"></div><h2 class="center">आपका ऑडिट प्रोसेस में है।</h2><p class="muted center">ऑडिट पूरी होते ही<br>गारंटी स्कीम अनलॉक हो जाएगी।</p><div class="pendmsg" id="pendmsg"></div></div><button class="btn" data-act="checkAudit">ऑडिट पूरी कर दी है</button></section>
+
+<section class="screen" id="s-done" data-s="8"><div class="done"><div class="big">💚</div><h2>बधाई हो!<br>आप प्रोग्राम में जुड़ गए</h2><p class="lead-line">रोज़ ऐप में अपनी सेहत देखें,<br>₹20,000 की तरफ़ बढ़ें।</p><button class="btn" data-act="close">ठीक है</button></div></section>
+
+</div>
+</div>
+
+<script>
+(function(){
+/* ===== CONFIG (this file = Optical Power · Audit NOT Done) ===== */
+var BASE='https://oobaxfbsmqhdaligebmg.supabase.co/functions/v1';
+var PROGRAM='sehat', SEG='op_pending', FLOW='2', FLOWNAME='audit_pending', OFFER='sehat_mg';
+var AUDIT_FALLBACK='https://csp-audit-tool-production.up.railway.app/';
+
+function pid(){ var el=document.getElementById('pid'); var v=el?(el.textContent||'').trim():''; return (v && v.indexOf('{')<0 && v.indexOf('@')<0)?v:''; }
+function auditUrl(){ var el=document.getElementById('au'); var v=el?(el.textContent||'').trim():''; return (v && v.indexOf('{')<0 && v.indexOf('@')<0)?v:AUDIT_FALLBACK; }
+
+var _ct={};
+function ct(name,props){ if(_ct[name]) return; _ct[name]={s:false,n:0};
+(function go(){ var st=_ct[name]; if(st.s) return;
+try{ if(window.CleverTap && window.CleverTap.pushEvent){ window.CleverTap.pushEvent(name, props||{}); st.s=true; return; } }catch(e){}
+st.n++; if(st.n<8) setTimeout(go,250*st.n); })(); }
+
+function dismiss(a){ try{ if(window.CleverTap && window.CleverTap.dismissInAppNotification){ window.CleverTap.dismissInAppNotification(); return; }
+if(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.clevertap){ window.webkit.messageHandlers.clevertap.postMessage({action:'dismissInAppNotification'}); return; } }catch(e){}
+a=a||0; if(a<6) setTimeout(function(){ dismiss(a+1); },250*(a+1)); }
+
+function openUrl(url){ try{ if(window.CleverTap && window.CleverTap.openUrlInBrowser){ window.CleverTap.openUrlInBrowser(url); return; } }catch(e){}
+try{ var w=window.open(url,'_blank'); if(w) return; }catch(e){} try{ window.location.href=url; }catch(e){} }
+
+function track(s){ var v=pid(); var raw=(document.getElementById('pid').textContent||'').trim(); if(!raw) return;
+try{ new Image().src=BASE+'/mbg-track?program='+PROGRAM+'&seg='+SEG+'&flow='+FLOW+'&screen='+s+'&pid='+encodeURIComponent(v||raw); }catch(e){} }
+
+/* opt-in ping: seg ends in _pending, so the endpoint records sehat_optin=true but NOT sehat_done (audit still required) */
+var optinDone=false;
+function optin(){ if(optinDone) return; optinDone=true; var v=pid(); if(!v) return;
+var u=BASE+'/mbg-optin?program='+PROGRAM+'&seg='+SEG+'&pid='+encodeURIComponent(v);
+try{ new Image().src=u; }catch(e){} try{ if(window.fetch) fetch(u,{mode:'no-cors',cache:'no-store',keepalive:true}); }catch(e){} }
+
+/* mbg-flow2-seen: sets sehat_done=true so this banner never re-shows after success */
+var seenDone=false;
+function seen(){ if(seenDone) return; seenDone=true; var v=pid(); if(!v) return;
+var u=BASE+'/mbg-flow2-seen?program='+PROGRAM+'&seg='+SEG+'&pid='+encodeURIComponent(v);
+try{ new Image().src=u; }catch(e){} try{ if(window.fetch) fetch(u,{mode:'no-cors',cache:'no-store',keepalive:true}); }catch(e){} }
+
+/* live audit gate — reads the audit DB via mbg-audit-status; returns {done, opted} */
+function statusFetch(cb){ var v=pid(); if(!v){ cb(null); return; }
+try{ fetch(BASE+'/mbg-audit-status?program='+PROGRAM+'&pid='+encodeURIComponent(v),{cache:'no-store'})
+.then(function(r){ return r.json(); }).then(function(d){ cb(d); }).catch(function(){ cb(null); }); }catch(e){ cb(null); } }
+
+var VIEW={ 's-edu':'Sehat_View_education','s-deal':'Sehat_View_deal','s-plan':'Sehat_View_plan','s-q1':'Sehat_Quiz_Q1','s-q2':'Sehat_Quiz_Q2','s-audit':'Sehat_Audit_Required','s-proc':'Sehat_Audit_Processing','s-done':'Sehat_Completed' };
+var DOT={ 's-edu':0,'s-deal':1,'s-plan':1,'s-q1':2,'s-q2':2,'s-audit':3,'s-proc':3,'s-done':3 };
+function show(id){ var secs=document.querySelectorAll('.screen'); for(var i=0;i<secs.length;i++){ secs[i].classList.toggle('active', secs[i].id===id); }
+document.querySelector('.card').classList.toggle('hero', id==='s-edu');
+var up=DOT[id]; for(var d=0;d<4;d++){ document.getElementById('d'+d).classList.toggle('on', d<=up); }
+var sec=document.getElementById(id); track(+sec.getAttribute('data-s')); if(VIEW[id]) ct(VIEW[id],{offer_id:OFFER,flow:FLOWNAME}); }
+
+function toSuccess(){ ct('Sehat_Audit_Verified',{offer_id:OFFER,flow:FLOWNAME}); seen(); show('s-done'); }
+
+var QFB={ 1:{ right:'बिल्कुल सही! 🎯 अपनी नेटवर्क सेहत (Optical Power) को <b>80% के पार</b> रखें — तभी ₹20,000 की गारंटी पक्की।', wrong:'👇 सही जवाब हरे रंग में है।<br>₹20,000 पाने के लिए अपनी नेटवर्क सेहत यानी <b>Optical Power को 80% के पार</b> ले जाना है — बाकी कोई रास्ता नहीं।' },
+2:{ right:'बिल्कुल सही! 🎯 Optical Power खराब हो तो <b>तुरंत जाकर ठीक करना</b> ही नेटवर्क का इलाज है — इसी से सेहत बढ़ती है।', wrong:'👇 सही जवाब हरे रंग में है।<br>किसी कनेक्शन की Optical Power खराब हो तो उसे <b>तुरंत ठीक करना</b> है — यही नेटवर्क का इलाज है, और इसी से आपकी Optical Power 80% पार होती है।' } };
+var answered={1:false,2:false};
+function answer(el){ var q=+el.getAttribute('data-q'); if(answered[q]) return; answered[q]=true;
+var right=el.getAttribute('data-right')==='1';
+var opts=document.getElementById('q'+q+'opts').querySelectorAll('.opt');
+for(var i=0;i<opts.length;i++){ opts[i].style.pointerEvents='none'; if(opts[i].getAttribute('data-right')==='1') opts[i].classList.add('correct'); }
+if(!right) el.classList.add('pick');
+var fb=document.getElementById('fb'+q); fb.className='feedback '+(right?'right':'wrong'); fb.innerHTML=right?QFB[q].right:QFB[q].wrong;
+ct('Sehat_Quiz_Answered',{offer_id:OFFER,flow:FLOWNAME,question:q,choice:el.getAttribute('data-choice'),correct:right});
+setTimeout(function(){ if(q===1){ show('s-q2'); } else { enroll(); } }, right?1400:3200); }
+
+/* enroll (audit-pending): after the quiz, register opt-in and route straight to the audit-required step (no separate confirm page) */
+function enroll(){ ct('Sehat_OptIn',{offer_id:OFFER,flow:FLOWNAME,enrolled:true}); optin(); show('s-audit'); }
+
+function openAudit(){ ct('Sehat_Audit_Opened',{offer_id:OFFER,flow:FLOWNAME}); openUrl(auditUrl()); show('s-proc'); }
+
+function checkAudit(btn){ var note=document.getElementById('pendmsg'); var orig=btn.textContent;
+note.textContent=''; btn.disabled=true; btn.textContent='जाँच रहे हैं…';
+function warn(){ btn.disabled=false; btn.textContent=orig; note.textContent='आपका ऑडिट अभी जाँचा जा रहा है। थोड़ी देर में दोबारा कोशिश करें।'; }
+statusFetch(function(d){ if(d && d.done){ btn.disabled=false; btn.textContent=orig; toSuccess(); } else { warn(); } }); }
+
+document.body.addEventListener('click',function(e){
+var o=e.target.closest('.opt'); if(o){ answer(o); return; }
+var a=e.target.closest('[data-act]'); if(!a) return; var act=a.getAttribute('data-act');
+if(act==='deal'){ show('s-deal'); } else if(act==='plan'){ show('s-plan'); } else if(act==='quiz'){ show('s-q1'); }
+else if(act==='openAudit'){ openAudit(); } else if(act==='checkAudit'){ checkAudit(a); }
+else if(act==='close'){ dismiss(0); } });
+
+/* auto-detect: CSP finishes the audit in the browser and returns to the app while on the processing screen */
+document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='visible' && document.getElementById('s-proc').classList.contains('active')){
+statusFetch(function(d){ if(d && d.done && document.getElementById('s-proc').classList.contains('active')){ toSuccess(); } }); } });
+
+/* ===== launch-router: jump to the CSP's live state =====
+   audit done -> success screen ; opted-but-audit-pending -> audit-required screen ; else -> full education flow */
+show('s-edu');
+statusFetch(function(d){ if(!d) return; if(d.done){ toSuccess(); } else if(d.opted){ show('s-audit'); } });
+})();
+</script>
+</body>
+</html>
