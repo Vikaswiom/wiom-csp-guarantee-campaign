@@ -1,0 +1,43 @@
+{
+  "generated": "2026-07-16 (sample data — run fetch_ct_data.py for live numbers)",
+  "sample": true,
+  "region": "eu1",
+  "funnel_steps": [
+    ["reached", "Reached", "Sehat_View_education"],
+    ["learn_more", "Learn more", "Sehat_Learn_More"],
+    ["view_plan", "Viewed plan", "Sehat_View_plan"],
+    ["start_quiz", "Started quiz", "Sehat_Start_Quiz"],
+    ["quiz_complete", "Completed quiz", "Sehat_Quiz_Complete"],
+    ["enrolled", "Enrolled (opt-in)", "Sehat_OptIn"]
+  ],
+  "campaigns": [
+    {
+      "key": "sehat_optical",
+      "label": "Optical Power",
+      "color": "#D9008D",
+      "funnel": {"reached": 52, "learn_more": 47, "view_plan": 41, "start_quiz": 38, "quiz_complete": 29, "enrolled": 21},
+      "quiz": {"q1_correct": 31, "q1_total": 38, "q2_correct": 27, "q2_total": 34},
+      "daily": [
+        {"date": "2026-07-16", "reached": 18, "enrolled": 6},
+        {"date": "2026-07-17", "reached": 14, "enrolled": 5},
+        {"date": "2026-07-18", "reached": 9, "enrolled": 4},
+        {"date": "2026-07-19", "reached": 7, "enrolled": 3},
+        {"date": "2026-07-20", "reached": 4, "enrolled": 3}
+      ]
+    },
+    {
+      "key": "sehat_sla",
+      "label": "Service SLA",
+      "color": "#2563EB",
+      "funnel": {"reached": 48, "learn_more": 42, "view_plan": 37, "start_quiz": 33, "quiz_complete": 26, "enrolled": 18},
+      "quiz": {"q1_correct": 28, "q1_total": 33, "q2_correct": 24, "q2_total": 30},
+      "daily": [
+        {"date": "2026-07-16", "reached": 16, "enrolled": 5},
+        {"date": "2026-07-17", "reached": 13, "enrolled": 5},
+        {"date": "2026-07-18", "reached": 10, "enrolled": 4},
+        {"date": "2026-07-19", "reached": 6, "enrolled": 2},
+        {"date": "2026-07-20", "reached": 3, "enrolled": 2}
+      ]
+    }
+  ]
+}
