@@ -50,17 +50,22 @@ section{margin-top:24px;}
 .card .cell .cv small{font-size:13px;font-weight:700;color:var(--faint);}
 .rate{color:var(--c);}
 
-/* funnel */
+/* funnels — two separate, one per cohort */
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:var(--shadow);}
-.funnel{display:grid;grid-template-columns:150px 1fr;gap:10px 16px;align-items:center;}
-.fstep{font-size:13px;font-weight:700;color:var(--ink);}
-.fstep small{display:block;font-size:11px;font-weight:600;color:var(--faint);}
-.ftrack{display:flex;flex-direction:column;gap:7px;}
-.frow{display:flex;align-items:center;gap:10px;}
-.fbar-wrap{flex:1;background:var(--soft);border-radius:7px;height:26px;position:relative;overflow:hidden;}
-.fbar{height:100%;border-radius:7px;min-width:3px;transition:width .5s cubic-bezier(.2,.7,.2,1);}
-.flabel{font-size:12.5px;font-weight:800;min-width:96px;text-align:right;color:var(--ink);white-space:nowrap;}
-.flabel small{color:var(--faint);font-weight:700;}
+.funnels{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.fpanel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow);border-top:4px solid var(--c,#ccc);}
+.fpanel .ftitle{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:900;letter-spacing:-.2px;}
+.fpanel .ftitle .sw{width:12px;height:12px;border-radius:50%;background:var(--c);}
+.fpanel .fsub{font-size:12.5px;color:var(--muted);font-weight:600;margin:5px 0 16px;line-height:1.4;}
+.fnl-step{margin:11px 0;}
+.fnl-step .lbl{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;font-weight:700;margin-bottom:5px;}
+.fnl-step .lbl .nm{color:var(--ink);}
+.fnl-step .lbl .vl{font-weight:900;font-size:14px;color:var(--ink);}
+.fnl-step .lbl .vl small{color:var(--faint);font-weight:700;font-size:11.5px;margin-left:3px;}
+.fnl-step .trk{background:var(--soft);border-radius:7px;height:24px;overflow:hidden;}
+.fnl-step .br{height:100%;border-radius:7px;min-width:3px;transition:width .5s cubic-bezier(.2,.7,.2,1);}
+.fnl-step .dp{font-size:11px;font-weight:700;color:var(--warn);margin-top:4px;height:14px;}
+.fnl-step .dp.zero{color:var(--good);}
 
 /* two-up */
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
@@ -110,8 +115,8 @@ section{margin-top:24px;}
   </section>
 
   <section>
-    <div class="h2">Enrollment funnel</div>
-    <div class="panel"><div class="funnel" id="funnel"></div></div>
+    <div class="h2">Enrollment funnels — by cohort</div>
+    <div class="funnels" id="funnels"></div>
   </section>
 
   <section class="two">
@@ -166,20 +171,24 @@ function render(D){
       </div></div>`;
   }).join('');
 
-  // funnel — one row per step, one bar per campaign, width = % of that campaign's reached
-  document.getElementById('funnel').innerHTML=steps.map((s,i)=>{
-    const key=s[0];
-    const bars=C.map(c=>{
-      const v=c.funnel[key], base=c.funnel.reached, p=pct(v,base);
-      const prev=i>0?c.funnel[steps[i-1][0]]:v, drop=prev-v;
-      const tipHtml=`<b>${c.label}</b><br>${s[1]}: <b>${nf(v)}</b> <span class="m">(${p}% of reached)</span>${i>0?`<br><span class="m">↓ ${drop} from ${steps[i-1][1].toLowerCase()}</span>`:''}`;
-      return `<div class="frow" data-tip="${encodeURIComponent(tipHtml)}">
-        <div class="fbar-wrap"><div class="fbar" style="width:${p}%;background:${c.color}"></div></div>
-        <div class="flabel">${nf(v)} <small>${p}%</small></div></div>`;
+  // two separate funnels — one per cohort (Optical Power low / Service SLA poor)
+  const COHORT={sehat_optical:{suffix:'low',desc:'Track A · CSPs whose Optical Power is low'},
+                sehat_sla:{suffix:'poor',desc:'Track B · CSPs whose Service SLA is poor'}};
+  document.getElementById('funnels').innerHTML=C.map(c=>{
+    const f=c.funnel, base=f.reached||1, co=COHORT[c.key]||{suffix:'',desc:''};
+    const rows=steps.map((s,i)=>{
+      const v=f[s[0]], p=pct(v,base);
+      const prev=i>0?f[steps[i-1][0]]:v, drop=prev-v, dp=pct(drop,prev);
+      const dropTxt=i===0?'':(drop>0?`↓ ${drop} dropped (−${dp}%)`:'✓ all continued');
+      const tipHtml=`<b>${c.label} ${co.suffix}</b><br>${s[1]} <span class="m">(${s[2]})</span>: <b>${nf(v)}</b> <span class="m">· ${p}% of reached</span>${i>0?`<br><span class="m">↓ ${drop} from ${steps[i-1][1].toLowerCase()}</span>`:''}`;
+      return `<div class="fnl-step" data-tip="${encodeURIComponent(tipHtml)}"><div class="lbl"><span class="nm">${s[1]}</span><span class="vl">${nf(v)} <small>${p}%</small></span></div>
+        <div class="trk"><div class="br" style="width:${p}%;background:${c.color}"></div></div>
+        <div class="dp ${drop>0?'':'zero'}">${dropTxt}</div></div>`;
     }).join('');
-    return `<div class="fstep">${s[1]}<small>${s[2]}</small></div><div class="ftrack">${bars}</div>`;
+    return `<div class="fpanel" style="--c:${c.color}"><div class="ftitle"><span class="sw"></span>${c.label} ${co.suffix}</div>
+      <div class="fsub">${co.desc}<br>${nf(f.reached)} reached → ${nf(f.enrolled)} enrolled · ${pct(f.enrolled,f.reached)}% opt-in</div>${rows}</div>`;
   }).join('');
-  document.querySelectorAll('.frow').forEach(el=>{
+  document.querySelectorAll('.fnl-step').forEach(el=>{
     el.addEventListener('mousemove',e=>showTip(decodeURIComponent(el.dataset.tip),e.clientX,e.clientY));
     el.addEventListener('mouseleave',hideTip);
   });
