@@ -64,23 +64,29 @@ def load_creds():
 ACCOUNT, PASSCODE, REGION = load_creds()
 BASE = f"https://{REGION}.api.clevertap.com"
 
+REQ_TIMEOUT = 35      # per-request; CloudFront 504s at ~30s, so don't wait longer
+MAX_ATTEMPTS = 3      # fail fast: a 504 outage shouldn't burn minutes per call
+
 def _req(url, method="GET", body=None, with_ct=False):
     headers = {"X-CleverTap-Account-Id": ACCOUNT, "X-CleverTap-Passcode": PASSCODE}
     data = None
     if body is not None:
         data = json.dumps(body).encode(); headers["Content-Type"] = "application/json"  # POST only
     req = urllib.request.Request(url, data=data, headers=headers, method=method)
-    for attempt in range(6):
+    last = "unknown error"
+    for attempt in range(MAX_ATTEMPTS):
         try:
-            with urllib.request.urlopen(req, timeout=60) as r:
+            with urllib.request.urlopen(req, timeout=REQ_TIMEOUT) as r:
                 return json.loads(r.read().decode())
         except urllib.error.HTTPError as e:
-            if e.code == 429 or e.code >= 500:
+            last = f"HTTP {e.code}"
+            if e.code == 429 or e.code >= 500:      # transient (incl. CleverTap 504 outage) -> retry
                 time.sleep(1.5 * (attempt + 1)); continue
-            raise
-        except Exception:
-            time.sleep(1.5 * (attempt + 1))
-    raise RuntimeError(f"request failed after retries: {url}")
+            raise                                    # 4xx (bad creds/params) -> fail immediately
+        except Exception as e:
+            last = f"{type(e).__name__}: {e}"; time.sleep(1.5 * (attempt + 1))
+    # surface the real cause (esp. CleverTap 504) instead of a generic message
+    raise RuntimeError(f"CleverTap API unreachable after {MAX_ATTEMPTS} attempts ({last}): {url}")
 
 def export_event(event_name, frm, to):
     """Yield every event record {profile, ts, event_props} for the date range."""
