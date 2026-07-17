@@ -106,9 +106,15 @@ def export_event(event_name, frm, to):
         for rec in (resp.get("records") or []):
             yield rec
 
-def identity_of(rec):
-    p = rec.get("profile") or {}
-    return p.get("identity") or p.get("objectId") or p.get("email") or None
+def csp_of(rec):
+    """Unique key = CSP ID, NOT profile.identity.
+
+    profile.identity is the app *user account* (accountid/userid). One CSP shop has
+    several logins (OWNER / MANAGER / techs) that each see the in-app, so deduping on
+    identity counts the same CSP many times and inflates reach above the eligible
+    cohort. profileData.cspid is the shop — that's what the program is measured in.
+    """
+    return ((rec.get("profile") or {}).get("profileData") or {}).get("cspid") or None
 
 def offer_of(rec):
     return ((rec.get("event_props") or {}).get("offer_id")) or ""
@@ -119,26 +125,28 @@ def main():
     to = datetime.date.today().strftime("%Y%m%d")
     print(f"CleverTap {REGION} · {frm} -> {to}")
 
-    # per offer: {key: set(identity)} ; daily {offer: {day: {reached:set, enrolled:set}}}
+    # per offer: {key: set(cspid)} ; daily {offer: {day: {reached:set, enrolled:set}}}
     uniq = {o: {k: set() for _, k in FUNNEL} for o in OFFERS}
     daily = {o: {} for o in OFFERS}
     quiz = {o: {"q1c": set(), "q1t": set(), "q2c": set(), "q2t": set()} for o in OFFERS}
+    no_csp = 0   # records we cannot attribute to a CSP (dropped, never counted)
 
     for event_name, key in FUNNEL:
         n = 0
         for rec in export_event(event_name, frm, to):
-            o = offer_of(rec); ident = identity_of(rec)
-            if o not in OFFERS or not ident: continue
-            uniq[o][key].add(ident); n += 1
+            o = offer_of(rec); csp = csp_of(rec)
+            if o not in OFFERS: continue
+            if not csp: no_csp += 1; continue
+            uniq[o][key].add(csp); n += 1
             if key in ("reached", "enrolled"):
                 day = str(rec.get("ts", ""))[:8]
                 d = daily[o].setdefault(day, {"reached": set(), "enrolled": set()})
-                d[key].add(ident)
+                d[key].add(csp)
         print(f"  {event_name:22s} -> {n} events")
 
     # quiz accuracy from Sehat_Quiz_Answered
     for rec in export_event("Sehat_Quiz_Answered", frm, to):
-        o = offer_of(rec); ident = identity_of(rec)
+        o = offer_of(rec); ident = csp_of(rec)
         if o not in OFFERS or not ident: continue
         pr = rec.get("event_props") or {}
         q = str(pr.get("question")); correct = str(pr.get("correct")).lower() in ("true", "1")
@@ -173,11 +181,16 @@ def main():
     path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data.json")
     json.dump(out, open(path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
     print("wrote", path)
+    if no_csp:
+        print(f"  WARNING: {no_csp} events had no profileData.cspid — not attributable to a CSP, dropped")
     for c in campaigns:
         f = c["funnel"]; rate = round(100 * f["enrolled"] / f["reached"]) if f["reached"] else 0
         el = c["eligible"]; cov = round(100 * f["reached"] / el) if el else 0
         print(f"  {c['label']:14s} eligible={el:4d}  reached={f['reached']:4d} ({cov}% cov)  "
               f"enrolled={f['enrolled']:4d}  opt-in={rate}%")
+        # reach can never exceed the eligible cohort — if it does, the dedup key is wrong
+        if el and f["reached"] > el:
+            print(f"  WARNING: {c['label']} reached ({f['reached']}) > eligible ({el}) — check dedup key / cohort list")
 
 if __name__ == "__main__":
     main()

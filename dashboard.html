@@ -209,7 +209,8 @@ function render(D){
 
   drawTrend(D);
   document.getElementById('foot').innerHTML='Events: '+steps.map(s=>`<code>${s[2]}</code>`).join(' ')+
-    '<br>Split by <code>offer_id</code> — Optical = <code>sehat_optical</code>, SLA = <code>sehat_sla</code>. Region <code>eu1</code>. Unique users per event, per campaign.';
+    '<br>Split by <code>offer_id</code> — Optical = <code>sehat_optical</code>, SLA = <code>sehat_sla</code>. Region <code>eu1</code>.'+
+    '<br>Counted as <b>unique CSP IDs</b> (<code>profileData.cspid</code>) per event — not app logins, since one CSP has several staff accounts (OWNER / MANAGER / tech).';
 }
 
 function drawTrend(D){
