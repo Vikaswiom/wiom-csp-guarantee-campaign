@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Sehat MG — Education Reminder · Service SLA (In-App)</title>
+<!--
+  IMPORTANT (CleverTap custom HTML):
+  Never use "//" single-line comments in the script block below.
+  CleverTap's editor / copy-paste can collapse this file onto one line,
+  and a "//" comment then swallows all code after it on that line,
+  breaking the whole script (the button stops working).
+  Use block comments only.
+
+  FREQUENCY (once per day, 3x lifetime) is NOT set here — it is a CleverTap
+  campaign setting. See the README notes at the bottom of this file.
+
+  VARIANT: to make the Service SLA twin, change ONE line — the CFG block below.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#D9008D; --accent-dark:#B00073; --text:#161021;
+    --muted:#665E75; --card:#FFFFFF; --line:#EAE4F2;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;}
+  body{
+    font-family:'Noto Sans Devanagari','Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,sans-serif;
+    color:var(--text); background:#EFE7F5;
+    min-height:100vh; min-height:100dvh; display:flex; align-items:stretch; justify-content:center;
+    padding:0; line-height:1.55;
+  }
+  .card{
+    width:100%; max-width:460px; background:var(--card);
+    overflow:hidden; position:relative;
+    min-height:100vh; min-height:100dvh; display:flex; flex-direction:column;
+    background:linear-gradient(160deg, var(--accent) 0%, #6E1C86 100%);
+  }
+  .head{color:#fff; padding:calc(15px + env(safe-area-inset-top)) 22px 15px; flex:0 0 auto;}
+  .brandrow{display:flex; align-items:center; gap:9px;}
+  .logo{font-size:15px; font-weight:800; letter-spacing:.3px;}
+  .x{margin-left:auto; width:30px; height:30px; border-radius:50%; border:1px solid rgba(255,255,255,.35);
+    background:rgba(255,255,255,.14); color:#fff; font-size:15px; font-weight:700; line-height:1;
+    cursor:pointer; font-family:inherit;}
+  .x:active{background:rgba(255,255,255,.28);}
+
+  .body{padding:20px 22px calc(24px + env(safe-area-inset-bottom)); flex:1 1 auto; display:flex; flex-direction:column;}
+  .hero-center{flex:1 1 auto; display:flex; flex-direction:column; justify-content:center; padding-bottom:6px;}
+  .shield{font-size:60px; line-height:1; text-align:center; margin:4px 0 0;}
+  .hero-amt{font-size:62px; font-weight:900; letter-spacing:-2px; line-height:1; text-align:center; color:#fff; margin:10px 0 0;}
+  .hero-guar{font-size:26px; font-weight:900; text-align:center; color:#fff; margin:4px 0 0; letter-spacing:-.3px;}
+  .hero-tag{font-size:18px; font-weight:600; color:#F3D8EA; text-align:center; line-height:1.5; margin:18px 0 0;}
+  .hero-tag b{color:#fff; font-weight:800;}
+
+  .btn{display:block; width:100%; border:none; cursor:pointer; font-family:inherit;
+    padding:17px 18px; border-radius:15px; font-size:18px; font-weight:800; letter-spacing:.2px;
+    background:#fff; color:var(--accent); box-shadow:0 10px 24px rgba(0,0,0,.18); transition:transform .08s;}
+  .btn:active{transform:translateY(2px) scale(.99); background:#F5E6F0; color:var(--accent-dark);}
+</style>
+</head>
+<body>
+<div class="card">
+
+  <div class="head">
+    <div class="brandrow">
+      <span class="logo">Wiom</span>
+      <button class="x" onclick="dismiss()" aria-label="बंद करें">✕</button>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="hero-center">
+      <div class="shield">🛡️</div>
+      <div class="hero-amt">₹20,000</div>
+      <div class="hero-guar">की गारंटी।</div>
+      <p class="hero-tag" id="tag">अगले 2 महीने —<br>बस अपनी <b>सर्विस समय से रीजाल्व</b> करें।</p>
+    </div>
+    <button class="btn" onclick="ack()">ठीक है</button>
+  </div>
+
+</div>
+
+<script>
+/* ================== CONFIG — the only block to change per variant ==================
+   Optical Power  ->  OFFER:'sehat_edu_optical', METRIC:'Optical Power'
+   Service SLA    ->  OFFER:'sehat_edu_sla',     METRIC:'Service SLA'
+   (for the SLA twin also swap the #tag copy in the HTML above)
+=================================================================================== */
+var CFG = { OFFER:'sehat_edu_sla', METRIC:'Service SLA', CAMPAIGN:'edu_reminder' };
+
+/* ---------- CleverTap event bridge (safe in plain browser too) ---------- */
+function ct(name, props){
+  props = props || {};
+  props.offer_id = CFG.OFFER;
+  props.metric   = CFG.METRIC;
+  props.campaign = CFG.CAMPAIGN;
+  props.view_no  = viewNo();
+  try{
+    if(window.CleverTap && typeof window.CleverTap.pushEvent === 'function'){
+      /* Android: the bridge is a Java interface — properties MUST be a JSON string, not a JS object */
+      window.CleverTap.pushEvent(name, JSON.stringify(props));
+    } else if(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.clevertap){
+      /* iOS: WKWebView bridge */
+      window.webkit.messageHandlers.clevertap.postMessage({action:'recordEventWithProps', event:name, properties:props});
+    }
+  }catch(e){}
+}
+function closeInApp(){
+  try{
+    if(window.CleverTap && typeof window.CleverTap.dismissInAppNotification === 'function'){
+      window.CleverTap.dismissInAppNotification();
+    } else if(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.clevertap){
+      window.webkit.messageHandlers.clevertap.postMessage({action:'dismissInAppNotification'});
+    }
+  }catch(e){}
+}
+
+/* ---------- Which of the 3 lifetime views is this? ----------
+   CleverTap caps delivery at 3; this only LABELS the view (1/2/3) so we can see
+   whether CSPs act on the 1st nudge or need the 3rd. localStorage may be wiped
+   by the app/webview — if so this degrades to 1, it never blocks the screen. */
+var _vn = 0;
+function viewNo(){
+  if(_vn) return _vn;
+  _vn = 1;
+  try{
+    var k = 'sehat_edu_views_' + CFG.OFFER;
+    var n = parseInt(window.localStorage.getItem(k) || '0', 10);
+    if(isNaN(n) || n < 0) n = 0;
+    _vn = n + 1;
+    window.localStorage.setItem(k, String(_vn));
+  }catch(e){ _vn = 1; }
+  return _vn;
+}
+
+/* ---------- Actions ---------- */
+var acted = false;
+function ack(){
+  if(acted) return; acted = true;
+  ct('SehatEdu_Ack', {});
+  closeInApp();
+}
+function dismiss(){
+  if(acted) return; acted = true;
+  ct('SehatEdu_Dismiss', {});
+  closeInApp();
+}
+
+/* ---------- Impression ---------- */
+ct('SehatEdu_Shown', {});
+</script>
+</body>
+</html>
