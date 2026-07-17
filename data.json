@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-17 04:54",
+  "generated": "2026-07-17 06:00",
   "sample": false,
   "region": "eu1",
   "funnel_steps": [
@@ -41,18 +41,18 @@
       "color": "#D9008D",
       "eligible": 53,
       "funnel": {
-        "reached": 65,
-        "learn_more": 54,
-        "view_plan": 52,
-        "start_quiz": 51,
-        "quiz_complete": 44,
-        "enrolled": 44
+        "reached": 47,
+        "learn_more": 41,
+        "view_plan": 40,
+        "start_quiz": 39,
+        "quiz_complete": 35,
+        "enrolled": 34
       },
       "quiz": {
-        "q1_correct": 40,
-        "q1_total": 45,
-        "q2_correct": 41,
-        "q2_total": 44
+        "q1_correct": 34,
+        "q1_total": 36,
+        "q2_correct": 34,
+        "q2_total": 35
       },
       "daily": [
         {
@@ -62,13 +62,13 @@
         },
         {
           "date": "2026-07-16",
-          "reached": 62,
-          "enrolled": 41
+          "reached": 44,
+          "enrolled": 32
         },
         {
           "date": "2026-07-17",
-          "reached": 3,
-          "enrolled": 2
+          "reached": 7,
+          "enrolled": 3
         }
       ]
     },
@@ -78,29 +78,29 @@
       "color": "#2563EB",
       "eligible": 32,
       "funnel": {
-        "reached": 38,
-        "learn_more": 30,
-        "view_plan": 29,
-        "start_quiz": 28,
-        "quiz_complete": 26,
-        "enrolled": 26
+        "reached": 27,
+        "learn_more": 25,
+        "view_plan": 24,
+        "start_quiz": 23,
+        "quiz_complete": 21,
+        "enrolled": 21
       },
       "quiz": {
-        "q1_correct": 22,
-        "q1_total": 27,
-        "q2_correct": 26,
-        "q2_total": 26
+        "q1_correct": 18,
+        "q1_total": 22,
+        "q2_correct": 21,
+        "q2_total": 21
       },
       "daily": [
         {
           "date": "2026-07-16",
-          "reached": 36,
-          "enrolled": 23
+          "reached": 25,
+          "enrolled": 18
         },
         {
           "date": "2026-07-17",
-          "reached": 3,
-          "enrolled": 3
+          "reached": 4,
+          "enrolled": 4
         }
       ]
     }
