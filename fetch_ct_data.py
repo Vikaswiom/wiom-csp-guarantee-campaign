@@ -29,6 +29,8 @@ COLORS = {"sehat_optical": "#D9008D", "sehat_sla": "#2563EB"}
 # eligible / addressable cohort per campaign (CSPs the campaign is live for).
 # Not a CleverTap metric — set manually; forms the funnel baseline (coverage %).
 ELIGIBLE = {"sehat_optical": 53, "sehat_sla": 32}
+# test / internal CSP IDs to drop from ALL counts (funnel, daily, quiz) — never real users.
+EXCLUDE = {"a0a0b1"}
 # funnel event name -> data key
 FUNNEL = [
     ("Sehat_View_education", "reached"),
@@ -137,6 +139,7 @@ def main():
             o = offer_of(rec); csp = csp_of(rec)
             if o not in OFFERS: continue
             if not csp: no_csp += 1; continue
+            if csp in EXCLUDE: continue          # test/internal CSP — drop from every count
             uniq[o][key].add(csp); n += 1
             if key in ("reached", "enrolled"):
                 day = str(rec.get("ts", ""))[:8]
@@ -148,6 +151,7 @@ def main():
     for rec in export_event("Sehat_Quiz_Answered", frm, to):
         o = offer_of(rec); ident = csp_of(rec)
         if o not in OFFERS or not ident: continue
+        if ident in EXCLUDE: continue            # test/internal CSP — drop from quiz stats too
         pr = rec.get("event_props") or {}
         q = str(pr.get("question")); correct = str(pr.get("correct")).lower() in ("true", "1")
         if q == "1":
