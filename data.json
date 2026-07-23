@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-23 02:10",
+  "generated": "2026-07-23 05:44",
   "sample": false,
   "region": "eu1",
   "funnel_steps": [
@@ -89,6 +89,11 @@
           "date": "2026-07-22",
           "reached": 10,
           "enrolled": 3
+        },
+        {
+          "date": "2026-07-23",
+          "reached": 3,
+          "enrolled": 1
         }
       ]
     },
@@ -98,7 +103,7 @@
       "color": "#2563EB",
       "eligible": 32,
       "funnel": {
-        "reached": 31,
+        "reached": 32,
         "learn_more": 30,
         "view_plan": 30,
         "start_quiz": 30,
@@ -146,6 +151,11 @@
           "date": "2026-07-22",
           "reached": 6,
           "enrolled": 3
+        },
+        {
+          "date": "2026-07-23",
+          "reached": 3,
+          "enrolled": 1
         }
       ]
     }
