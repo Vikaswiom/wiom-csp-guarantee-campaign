@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01 05:18",
+  "generated": "2026-08-01 08:03",
   "sample": false,
   "region": "eu1",
   "funnel_steps": [
@@ -137,7 +137,7 @@
         },
         {
           "date": "2026-08-01",
-          "reached": 2,
+          "reached": 4,
           "enrolled": 0
         }
       ]
@@ -158,7 +158,7 @@
       "quiz": {
         "q1_correct": 30,
         "q1_total": 31,
-        "q2_correct": 30,
+        "q2_correct": 31,
         "q2_total": 31
       },
       "daily": [
@@ -244,8 +244,8 @@
         },
         {
           "date": "2026-08-01",
-          "reached": 1,
-          "enrolled": 0
+          "reached": 3,
+          "enrolled": 1
         }
       ]
     }
