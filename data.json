@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03 09:22",
+  "generated": "2026-08-03 12:49",
   "sample": false,
   "region": "eu1",
   "funnel_steps": [
@@ -147,8 +147,8 @@
         },
         {
           "date": "2026-08-03",
-          "reached": 5,
-          "enrolled": 0
+          "reached": 7,
+          "enrolled": 1
         }
       ]
     },
@@ -159,17 +159,17 @@
       "eligible": 32,
       "funnel": {
         "reached": 32,
-        "learn_more": 31,
-        "view_plan": 31,
-        "start_quiz": 31,
-        "quiz_complete": 31,
-        "enrolled": 31
+        "learn_more": 32,
+        "view_plan": 32,
+        "start_quiz": 32,
+        "quiz_complete": 32,
+        "enrolled": 32
       },
       "quiz": {
         "q1_correct": 30,
-        "q1_total": 31,
-        "q2_correct": 31,
-        "q2_total": 31
+        "q1_total": 32,
+        "q2_correct": 32,
+        "q2_total": 32
       },
       "daily": [
         {
@@ -264,8 +264,8 @@
         },
         {
           "date": "2026-08-03",
-          "reached": 4,
-          "enrolled": 0
+          "reached": 5,
+          "enrolled": 1
         }
       ]
     }
