@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-10 14:13",
+  "generated": "2026-08-10 15:50",
   "sample": false,
   "region": "eu1",
   "funnel_steps": [
@@ -182,8 +182,8 @@
         },
         {
           "date": "2026-08-10",
-          "reached": 5,
-          "enrolled": 0
+          "reached": 6,
+          "enrolled": 1
         }
       ]
     },
