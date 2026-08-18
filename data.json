@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-18 17:18",
+  "generated": "2026-08-18 18:21",
   "sample": false,
   "region": "eu1",
   "funnel_steps": [
@@ -41,191 +41,20 @@
       "color": "#D9008D",
       "eligible": 53,
       "funnel": {
-        "reached": 53,
-        "learn_more": 52,
-        "view_plan": 52,
-        "start_quiz": 52,
-        "quiz_complete": 51,
-        "enrolled": 51
+        "reached": 0,
+        "learn_more": 0,
+        "view_plan": 0,
+        "start_quiz": 0,
+        "quiz_complete": 0,
+        "enrolled": 0
       },
       "quiz": {
-        "q1_correct": 50,
-        "q1_total": 51,
-        "q2_correct": 51,
-        "q2_total": 51
+        "q1_correct": 0,
+        "q1_total": 0,
+        "q2_correct": 0,
+        "q2_total": 0
       },
-      "daily": [
-        {
-          "date": "2026-07-16",
-          "reached": 44,
-          "enrolled": 32
-        },
-        {
-          "date": "2026-07-17",
-          "reached": 16,
-          "enrolled": 10
-        },
-        {
-          "date": "2026-07-18",
-          "reached": 27,
-          "enrolled": 16
-        },
-        {
-          "date": "2026-07-19",
-          "reached": 16,
-          "enrolled": 9
-        },
-        {
-          "date": "2026-07-20",
-          "reached": 19,
-          "enrolled": 11
-        },
-        {
-          "date": "2026-07-21",
-          "reached": 11,
-          "enrolled": 3
-        },
-        {
-          "date": "2026-07-22",
-          "reached": 10,
-          "enrolled": 3
-        },
-        {
-          "date": "2026-07-23",
-          "reached": 11,
-          "enrolled": 3
-        },
-        {
-          "date": "2026-07-24",
-          "reached": 9,
-          "enrolled": 2
-        },
-        {
-          "date": "2026-07-25",
-          "reached": 6,
-          "enrolled": 2
-        },
-        {
-          "date": "2026-07-26",
-          "reached": 8,
-          "enrolled": 3
-        },
-        {
-          "date": "2026-07-27",
-          "reached": 5,
-          "enrolled": 1
-        },
-        {
-          "date": "2026-07-28",
-          "reached": 7,
-          "enrolled": 2
-        },
-        {
-          "date": "2026-07-29",
-          "reached": 5,
-          "enrolled": 0
-        },
-        {
-          "date": "2026-07-30",
-          "reached": 6,
-          "enrolled": 1
-        },
-        {
-          "date": "2026-07-31",
-          "reached": 5,
-          "enrolled": 2
-        },
-        {
-          "date": "2026-08-01",
-          "reached": 5,
-          "enrolled": 0
-        },
-        {
-          "date": "2026-08-02",
-          "reached": 5,
-          "enrolled": 1
-        },
-        {
-          "date": "2026-08-03",
-          "reached": 8,
-          "enrolled": 2
-        },
-        {
-          "date": "2026-08-04",
-          "reached": 4,
-          "enrolled": 1
-        },
-        {
-          "date": "2026-08-05",
-          "reached": 9,
-          "enrolled": 4
-        },
-        {
-          "date": "2026-08-06",
-          "reached": 3,
-          "enrolled": 0
-        },
-        {
-          "date": "2026-08-07",
-          "reached": 6,
-          "enrolled": 1
-        },
-        {
-          "date": "2026-08-08",
-          "reached": 6,
-          "enrolled": 1
-        },
-        {
-          "date": "2026-08-09",
-          "reached": 4,
-          "enrolled": 1
-        },
-        {
-          "date": "2026-08-10",
-          "reached": 6,
-          "enrolled": 1
-        },
-        {
-          "date": "2026-08-11",
-          "reached": 5,
-          "enrolled": 1
-        },
-        {
-          "date": "2026-08-12",
-          "reached": 5,
-          "enrolled": 0
-        },
-        {
-          "date": "2026-08-13",
-          "reached": 3,
-          "enrolled": 0
-        },
-        {
-          "date": "2026-08-14",
-          "reached": 3,
-          "enrolled": 0
-        },
-        {
-          "date": "2026-08-15",
-          "reached": 5,
-          "enrolled": 0
-        },
-        {
-          "date": "2026-08-16",
-          "reached": 4,
-          "enrolled": 3
-        },
-        {
-          "date": "2026-08-17",
-          "reached": 3,
-          "enrolled": 0
-        },
-        {
-          "date": "2026-08-18",
-          "reached": 3,
-          "enrolled": 0
-        }
-      ]
+      "daily": []
     },
     {
       "key": "sehat_sla",
@@ -233,176 +62,20 @@
       "color": "#2563EB",
       "eligible": 32,
       "funnel": {
-        "reached": 32,
-        "learn_more": 32,
-        "view_plan": 32,
-        "start_quiz": 32,
-        "quiz_complete": 32,
-        "enrolled": 32
+        "reached": 0,
+        "learn_more": 0,
+        "view_plan": 0,
+        "start_quiz": 0,
+        "quiz_complete": 0,
+        "enrolled": 0
       },
       "quiz": {
-        "q1_correct": 31,
-        "q1_total": 32,
-        "q2_correct": 32,
-        "q2_total": 32
+        "q1_correct": 0,
+        "q1_total": 0,
+        "q2_correct": 0,
+        "q2_total": 0
       },
-      "daily": [
-        {
-          "date": "2026-07-16",
-          "reached": 24,
-          "enrolled": 17
-        },
-        {
-          "date": "2026-07-17",
-          "reached": 10,
-          "enrolled": 7
-        },
-        {
-          "date": "2026-07-18",
-          "reached": 15,
-          "enrolled": 8
-        },
-        {
-          "date": "2026-07-19",
-          "reached": 11,
-          "enrolled": 7
-        },
-        {
-          "date": "2026-07-20",
-          "reached": 10,
-          "enrolled": 5
-        },
-        {
-          "date": "2026-07-21",
-          "reached": 3,
-          "enrolled": 2
-        },
-        {
-          "date": "2026-07-22",
-          "reached": 6,
-          "enrolled": 3
-        },
-        {
-          "date": "2026-07-23",
-          "reached": 5,
-          "enrolled": 2
-        },
-        {
-          "date": "2026-07-24",
-          "reached": 2,
-          "enrolled": 0
-        },
-        {
-          "date": "2026-07-25",
-          "reached": 6,
-          "enrolled": 1
-        },
-        {
-          "date": "2026-07-26",
-          "reached": 7,
-          "enrolled": 4
-        },
-        {
-          "date": "2026-07-27",
-          "reached": 7,
-          "enrolled": 3
-        },
-        {
-          "date": "2026-07-28",
-          "reached": 1,
-          "enrolled": 0
-        },
-        {
-          "date": "2026-07-29",
-          "reached": 4,
-          "enrolled": 1
-        },
-        {
-          "date": "2026-07-30",
-          "reached": 2,
-          "enrolled": 1
-        },
-        {
-          "date": "2026-07-31",
-          "reached": 4,
-          "enrolled": 2
-        },
-        {
-          "date": "2026-08-01",
-          "reached": 3,
-          "enrolled": 2
-        },
-        {
-          "date": "2026-08-02",
-          "reached": 2,
-          "enrolled": 1
-        },
-        {
-          "date": "2026-08-03",
-          "reached": 5,
-          "enrolled": 1
-        },
-        {
-          "date": "2026-08-04",
-          "reached": 1,
-          "enrolled": 0
-        },
-        {
-          "date": "2026-08-05",
-          "reached": 4,
-          "enrolled": 1
-        },
-        {
-          "date": "2026-08-07",
-          "reached": 1,
-          "enrolled": 0
-        },
-        {
-          "date": "2026-08-09",
-          "reached": 2,
-          "enrolled": 0
-        },
-        {
-          "date": "2026-08-10",
-          "reached": 1,
-          "enrolled": 0
-        },
-        {
-          "date": "2026-08-11",
-          "reached": 2,
-          "enrolled": 0
-        },
-        {
-          "date": "2026-08-12",
-          "reached": 3,
-          "enrolled": 0
-        },
-        {
-          "date": "2026-08-13",
-          "reached": 2,
-          "enrolled": 0
-        },
-        {
-          "date": "2026-08-14",
-          "reached": 1,
-          "enrolled": 0
-        },
-        {
-          "date": "2026-08-15",
-          "reached": 2,
-          "enrolled": 0
-        },
-        {
-          "date": "2026-08-16",
-          "reached": 2,
-          "enrolled": 2
-        },
-        {
-          "date": "2026-08-17",
-          "reached": 4,
-          "enrolled": 1
-        }
-      ]
+      "daily": []
     }
   ]
 }
