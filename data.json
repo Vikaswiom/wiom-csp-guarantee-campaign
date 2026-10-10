@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-10 10:14",
+  "generated": "2026-10-10 16:00",
   "sample": false,
   "region": "eu1",
   "funnel_steps": [
@@ -258,18 +258,18 @@
       "color": "#2563EB",
       "eligible": 32,
       "funnel": {
-        "reached": 33,
-        "learn_more": 33,
-        "view_plan": 33,
-        "start_quiz": 33,
-        "quiz_complete": 33,
-        "enrolled": 33
+        "reached": 34,
+        "learn_more": 34,
+        "view_plan": 34,
+        "start_quiz": 34,
+        "quiz_complete": 34,
+        "enrolled": 34
       },
       "quiz": {
-        "q1_correct": 32,
-        "q1_total": 33,
-        "q2_correct": 33,
-        "q2_total": 33
+        "q1_correct": 33,
+        "q1_total": 34,
+        "q2_correct": 34,
+        "q2_total": 34
       },
       "daily": [
         {
